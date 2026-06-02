@@ -7,6 +7,7 @@
   <title>Importadora Autodecor | Repuestos Automotrices Bolivia</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&display=swap"
     rel="stylesheet">
+  <link rel="icon" type="image/png" href="img/logo.jpg">
   <style>
     :root {
       /* Tema Claro (Por defecto) */
@@ -590,20 +591,11 @@
       width: auto;
       max-width: 90px;
       object-fit: contain;
-      filter: grayscale(100%) opacity(0.5);
       transition: all 0.3s ease;
     }
 
     .marca-item:hover .marca-img {
-      filter: grayscale(0%) opacity(1);
-    }
-
-    body.dark-mode .marca-item .marca-img {
-      filter: grayscale(100%) opacity(0.4) brightness(1.5);
-    }
-
-    body.dark-mode .marca-item:hover .marca-img {
-      filter: grayscale(0%) opacity(1) brightness(1);
+      transform: scale(1.08);
     }
 
     .marca-item span {
