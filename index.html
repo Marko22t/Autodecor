@@ -312,7 +312,7 @@
       justify-content: center;
       position: relative;
       text-align: center;
-      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1800&q=80') center/cover no-repeat;
+      background: url('img/hero-autodecor.png') center/cover no-repeat;
       overflow: hidden;
       padding-top: 72px;
     }
@@ -847,6 +847,71 @@
       color: #fff;
     }
 
+    /* BRAND SHOWCASE BANNER */
+    .brand-showcase {
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .brand-showcase-img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .brand-showcase-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(21, 101, 192, 0.85) 0%, rgba(10, 10, 10, 0.3) 50%, rgba(21, 101, 192, 0.85) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    body.dark-mode .brand-showcase-overlay {
+      background: linear-gradient(90deg, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0.3) 50%, rgba(10, 10, 10, 0.9) 100%);
+    }
+
+    .brand-showcase-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--secondary);
+      object-fit: cover;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .brand-showcase-text {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      color: #fff;
+      letter-spacing: 4px;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .brand-showcase-text span {
+      color: var(--secondary);
+    }
+
+    .brand-showcase-sub {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
     /* FOOTER */
     footer {
       background: #060606;
@@ -1181,7 +1246,7 @@
     </div>
     <div class="quick-grid">
       <a href="nosotros.html" class="quick-card">
-        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&q=80" alt="Nosotros">
+        <img src="img/equipo-autodecor.png" alt="Nosotros - Equipo Autodecor">
         <div class="quick-overlay">
           <div class="quick-label">Conoce la empresa</div>
           <div class="quick-title">NOSOTROS</div>
@@ -1189,7 +1254,7 @@
         </div>
       </a>
       <a href="productos.html" class="quick-card">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Productos">
+        <img src="img/productos-autodecor.png" alt="Productos Autodecor">
         <div class="quick-overlay">
           <div class="quick-label">Nuestro catálogo</div>
           <div class="quick-title">PRODUCTOS</div>
@@ -1197,13 +1262,23 @@
         </div>
       </a>
       <a href="tiendas.html" class="quick-card">
-        <img src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?w=600&q=80" alt="Tiendas">
+        <img src="img/tienda-autodecor.png" alt="Tiendas Autodecor">
         <div class="quick-overlay">
           <div class="quick-label">Encuéntranos</div>
           <div class="quick-title">TIENDAS</div>
           <div class="quick-arrow">→</div>
         </div>
       </a>
+    </div>
+  </section>
+
+  <!-- BRAND SHOWCASE BANNER -->
+  <section class="brand-showcase">
+    <img src="img/autodecor1.jpg" alt="Autodecor Group Banner" class="brand-showcase-img">
+    <div class="brand-showcase-overlay">
+      <img src="img/logo.jpg" alt="Autodecor Logo" class="brand-showcase-logo">
+      <div class="brand-showcase-text">AUTO <span>DECOR</span> GROUP</div>
+      <div class="brand-showcase-sub">Repuestos de Calidad Garantizada</div>
     </div>
   </section>
 

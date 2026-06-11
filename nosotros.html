@@ -314,7 +314,7 @@
       align-items: center;
       padding: 0 5%;
       position: relative;
-      background: url('https://images.unsplash.com/photo-1486006920555-c77dcf18193c?w=1600&q=80') center/cover no-repeat;
+      background: url('img/tienda-autodecor.png') center/cover no-repeat;
       margin-top: 72px;
     }
 
@@ -620,6 +620,126 @@
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.75);
       margin-top: 8px;
+    }
+
+    /* BRAND IDENTITY BANNER */
+    .brand-identity {
+      padding: 60px 5%;
+      background: var(--bg-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-smooth);
+    }
+
+    .brand-identity-inner {
+      max-width: 700px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .brand-identity-img {
+      width: 180px;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 12px;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .brand-identity-content h3 {
+      font-family: var(--font-title);
+      font-size: 2rem;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      transition: color var(--transition-smooth);
+    }
+
+    .brand-identity-content h3 span {
+      color: var(--primary);
+    }
+
+    body.dark-mode .brand-identity-content h3 span {
+      color: var(--secondary);
+    }
+
+    .brand-identity-content p {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      transition: color var(--transition-smooth);
+    }
+
+    /* BRAND SHOWCASE BANNER */
+    .brand-showcase {
+      position: relative;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .brand-showcase-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .brand-showcase-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(21, 101, 192, 0.85) 0%, rgba(10, 10, 10, 0.2) 50%, rgba(21, 101, 192, 0.85) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    body.dark-mode .brand-showcase-overlay {
+      background: linear-gradient(90deg, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0.3) 50%, rgba(10, 10, 10, 0.9) 100%);
+    }
+
+    .brand-showcase-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid var(--secondary);
+      object-fit: cover;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .brand-showcase-text {
+      font-family: var(--font-title);
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      color: #fff;
+      letter-spacing: 4px;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .brand-showcase-text span {
+      color: var(--secondary);
+    }
+
+    .brand-showcase-sub {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    @media(max-width: 600px) {
+      .brand-identity-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .brand-identity-img {
+        width: 140px;
+        height: 140px;
+      }
     }
 
     /* VISION MISION */
@@ -1070,7 +1190,7 @@
         </div>
       </div>
       <div class="historia-img">
-        <img src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?w=700&q=80" alt="Autodecor tienda">
+        <img src="img/hero-autodecor.png" alt="Autodecor almacén de repuestos">
         <div class="historia-img-badge">
           <div class="historia-img-badge-num">35+</div>
           <div class="historia-img-badge-text">Años de trayectoria</div>
@@ -1138,6 +1258,17 @@
       <div class="stat-item">
         <div class="stat-num">100%</div>
         <div class="stat-label">Compromiso con calidad</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND IDENTITY -->
+  <section class="brand-identity">
+    <div class="brand-identity-inner">
+      <img src="img/autodecor2.jpg" alt="Autodecor - Repuestos de Calidad Garantizada" class="brand-identity-img">
+      <div class="brand-identity-content">
+        <h3>NUESTRA <span>MARCA</span></h3>
+        <p>Auto Decor Group es sinónimo de calidad garantizada en repuestos automotrices. Nuestra marca representa más de tres décadas de compromiso con el mercado boliviano, siendo referentes en confianza y excelencia.</p>
       </div>
     </div>
   </section>
@@ -1214,6 +1345,15 @@
     </div>
   </section>
 
+  <!-- BRAND SHOWCASE BANNER -->
+  <section class="brand-showcase">
+    <img src="img/autodecor1.jpg" alt="Autodecor Group Banner" class="brand-showcase-img">
+    <div class="brand-showcase-overlay">
+      <img src="img/logo.jpg" alt="Autodecor Logo" class="brand-showcase-logo">
+      <div class="brand-showcase-text">AUTO <span>DECOR</span> GROUP</div>
+      <div class="brand-showcase-sub">Santa Cruz · Bolivia · Desde 1988</div>
+    </div>
+  </section>
   <footer>
     <div class="footer-grid">
       <div>
