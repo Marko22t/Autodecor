@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nosotros | Importadora Autodecor</title>
-  <link rel="icon" type="image/png" href="img/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&display=swap"
     rel="stylesheet">
   <style>
@@ -708,7 +707,7 @@
       border-radius: 50%;
       border: 3px solid var(--secondary);
       object-fit: cover;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     }
 
     .brand-showcase-text {
@@ -726,7 +725,7 @@
 
     .brand-showcase-sub {
       font-size: 0.78rem;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       letter-spacing: 3px;
       text-transform: uppercase;
       font-weight: 700;
@@ -737,6 +736,7 @@
         flex-direction: column;
         text-align: center;
       }
+
       .brand-identity-img {
         width: 140px;
         height: 140px;
@@ -1119,62 +1119,6 @@
         grid-template-columns: 1fr;
       }
     }
-  
-    /* FLOATING BUTTONS */
-    .floating-buttons {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      z-index: 9999;
-    }
-    .float-btn {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      color: #ffffff;
-    }
-    .float-btn svg {
-      width: 28px;
-      height: 28px;
-      fill: currentColor;
-    }
-    .float-whatsapp {
-      background-color: #25D366;
-      animation: float-pulse 2s infinite;
-    }
-    .float-whatsapp:hover {
-      background-color: #20ba5a;
-      transform: scale(1.1) translateY(-2px);
-      box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
-    }
-    .float-facebook {
-      background-color: #1877F2;
-    }
-    .float-facebook:hover {
-      background-color: #166fe5;
-      transform: scale(1.1) translateY(-2px);
-      box-shadow: 0 6px 15px rgba(24, 119, 242, 0.5);
-    }
-    @keyframes float-pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-      }
-    }
-
   </style>
 </head>
 
@@ -1182,7 +1126,7 @@
 
   <nav>
     <a href="index.html" class="nav-logo">
-      <img src="img/logo.png" alt="Autodecor">
+      <img src="img/logo.jpg" alt="Autodecor">
       <div class="nav-logo-text">AUTO<span>DECOR</span></div>
     </a>
     <div class="nav-right-container">
@@ -1290,7 +1234,7 @@
         <p>Primeros pasos hacia el comercio digital con catálogo de productos en internet.</p>
       </div>
       <div class="hito-card">
-        <div class="hito-year">2024</div>
+        <div class="hito-year">2026</div>
         <h3>Hoy</h3>
         <p>15 sucursales activas, más de 10 marcas y despacho a todo Bolivia con pedidos por internet.</p>
       </div>
@@ -1325,7 +1269,8 @@
       <img src="img/autodecor2.jpg" alt="Autodecor - Repuestos de Calidad Garantizada" class="brand-identity-img">
       <div class="brand-identity-content">
         <h3>NUESTRA <span>MARCA</span></h3>
-        <p>Auto Decor Group es sinónimo de calidad garantizada en repuestos automotrices. Nuestra marca representa más de tres décadas de compromiso con el mercado boliviano, siendo referentes en confianza y excelencia.</p>
+        <p>Auto Decor Group es sinónimo de calidad garantizada en repuestos automotrices. Nuestra marca representa más
+          de tres décadas de compromiso con el mercado boliviano, siendo referentes en confianza y excelencia.</p>
       </div>
     </div>
   </section>
@@ -1406,7 +1351,7 @@
   <section class="brand-showcase">
     <img src="img/autodecor1.jpg" alt="Autodecor Group Banner" class="brand-showcase-img">
     <div class="brand-showcase-overlay">
-      <img src="img/logo.png" alt="Autodecor Logo" class="brand-showcase-logo">
+      <img src="img/logo.jpg" alt="Autodecor Logo" class="brand-showcase-logo">
       <div class="brand-showcase-text">AUTO <span>DECOR</span> GROUP</div>
       <div class="brand-showcase-sub">Santa Cruz · Bolivia · Desde 1988</div>
     </div>
@@ -1415,7 +1360,7 @@
     <div class="footer-grid">
       <div>
         <a href="index.html" class="footer-brand-logo">
-          <img src="img/logo.png" alt="Autodecor">
+          <img src="img/logo.jpg" alt="Autodecor">
           <div class="footer-brand-name">AUTO<span>DECOR</span> GROUP</div>
         </a>
         <p class="footer-brand">Más de 35 años siendo el proveedor de confianza en repuestos y accesorios automotrices
@@ -1471,21 +1416,6 @@
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   </script>
-
-  <!-- FLOATING CONTACT BUTTONS -->
-  <div class="floating-buttons">
-    <a href="https://wa.me/59175364818" target="_blank" class="float-btn float-whatsapp" title="Escríbenos por WhatsApp">
-      <svg viewBox="0 0 24 24">
-        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.057 5.284 5.349 0 11.859 0c3.151.001 6.115 1.23 8.344 3.461 2.23 2.231 3.458 5.195 3.457 8.348-.003 6.557-5.297 11.84-11.807 11.84-2.001-.001-3.968-.51-5.717-1.488L0 24zm6.59-4.846c1.6.95 3.197 1.451 4.793 1.452 5.568 0 10.1-4.526 10.103-10.096.002-2.699-1.047-5.236-2.951-7.14C16.63 1.464 14.09 .417 11.858.417a10.1 10.1 0 0 0-10.097 10.1c-.001 1.761.472 3.483 1.369 5.021l-.974 3.561 3.65-.958zm12.03-5.269c-.327-.164-1.938-.956-2.237-1.064-.299-.11-.517-.164-.734.164-.217.327-.844 1.064-1.034 1.282-.19.218-.38.245-.707.081-.327-.164-1.381-.508-2.63-1.622-.972-.867-1.628-1.938-1.819-2.264-.19-.327-.02-.504.144-.666.147-.146.327-.382.49-.573.163-.19.217-.327.326-.545.11-.218.054-.409-.027-.573-.082-.164-.734-1.769-1.007-2.422-.265-.636-.53-.55-.734-.56-.19-.01-.408-.012-.625-.012-.218 0-.573.082-.872.409-.299.327-1.143 1.117-1.143 2.724 0 1.608 1.171 3.159 1.334 3.377.163.218 2.302 3.515 5.576 4.925.779.336 1.387.537 1.862.688.783.248 1.496.213 2.059.129.628-.094 1.938-.792 2.21-1.556.272-.764.272-1.418.19-1.556-.081-.136-.298-.218-.626-.382z"/>
-      </svg>
-    </a>
-    <a href="https://www.facebook.com/importadora.autodecor.group/?locale=es_LA" target="_blank" class="float-btn float-facebook" title="Síguenos en Facebook">
-      <svg viewBox="0 0 24 24">
-        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-      </svg>
-    </a>
-  </div>
-
 </body>
 
 </html>
