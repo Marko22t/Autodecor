@@ -1455,6 +1455,600 @@
     </div>
   </section>
 
+<!-- MAPA INTERACTIVO -->
+<style>
+  /* ===== MAPA INTERACTIVO ===== */
+  .mapa-section {
+    padding: 100px 5%;
+    background: var(--bg-primary);
+    transition: background var(--transition-smooth);
+  }
+
+  .mapa-section .section-header {
+    margin-bottom: 50px;
+  }
+
+  .mapa-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 0;
+    max-width: 1280px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    border: 1px solid var(--border-color);
+    min-height: 620px;
+  }
+
+  /* ── SIDEBAR ── */
+  .mapa-sidebar {
+    background: var(--bg-card);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: background var(--transition-smooth), border-color var(--transition-smooth);
+  }
+
+  .mapa-sidebar-header {
+    padding: 22px 20px 16px;
+    background: var(--primary);
+    position: relative;
+  }
+
+  .mapa-sidebar-header h3 {
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .mapa-sidebar-header h3 span {
+    color: var(--secondary);
+  }
+
+  /* Buscador */
+  .mapa-search-wrap {
+    position: relative;
+  }
+
+  .mapa-search-wrap svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    fill: #8baed4;
+    pointer-events: none;
+  }
+
+  #mapaSearch {
+    width: 100%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    padding: 10px 14px 10px 38px;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  #mapaSearch::placeholder { color: rgba(255,255,255,0.55); }
+  #mapaSearch:focus { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5); }
+
+  /* Lista sucursales */
+  .mapa-lista {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+
+  .mapa-lista::-webkit-scrollbar { width: 5px; }
+  .mapa-lista::-webkit-scrollbar-track { background: transparent; }
+  .mapa-lista::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+
+  .mapa-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mapa-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--primary);
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
+  }
+
+  body.dark-mode .mapa-item::before { background: var(--secondary); }
+
+  .mapa-item:hover,
+  .mapa-item.active {
+    background: rgba(21, 101, 192, 0.07);
+    padding-left: 24px;
+  }
+
+  body.dark-mode .mapa-item:hover,
+  body.dark-mode .mapa-item.active {
+    background: rgba(245, 197, 24, 0.06);
+  }
+
+  .mapa-item:hover::before,
+  .mapa-item.active::before { transform: scaleY(1); }
+
+  .mapa-item-badge {
+    min-width: 38px;
+    height: 38px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-title);
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .mapa-item.active .mapa-item-badge {
+    background: var(--secondary);
+    color: #111;
+  }
+
+  .mapa-item-badge.main-badge {
+    background: linear-gradient(135deg, #d4af37, #b8940f);
+  }
+
+  .mapa-item-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mapa-item-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-smooth);
+  }
+
+  .mapa-item-addr {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-smooth);
+  }
+
+  .mapa-item-arrow {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .mapa-item.active .mapa-item-arrow,
+  .mapa-item:hover .mapa-item-arrow {
+    color: var(--primary);
+    transform: translateX(3px);
+  }
+
+  body.dark-mode .mapa-item.active .mapa-item-arrow,
+  body.dark-mode .mapa-item:hover .mapa-item-arrow {
+    color: var(--secondary);
+  }
+
+  .mapa-no-results {
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    display: none;
+  }
+
+  /* ── PANEL DERECHO: mapa + info ── */
+  .mapa-panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-secondary);
+    transition: background var(--transition-smooth);
+  }
+
+  /* Tarjeta de info */
+  .mapa-info-card {
+    padding: 18px 24px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    min-height: 80px;
+    transition: background var(--transition-smooth), border-color var(--transition-smooth);
+  }
+
+  .mapa-info-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--primary);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .mapa-info-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mapa-info-title {
+    font-family: var(--font-title);
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    margin-bottom: 3px;
+    transition: color var(--transition-smooth);
+  }
+
+  .mapa-info-addr {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    transition: color var(--transition-smooth);
+  }
+
+  .mapa-info-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
+  .mapa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .mapa-btn-wa {
+    background: #25D366;
+    color: #fff;
+  }
+  .mapa-btn-wa:hover {
+    background: #20ba5a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37,211,102,0.4);
+  }
+
+  .mapa-btn-maps {
+    background: var(--primary);
+    color: #fff;
+  }
+  .mapa-btn-maps:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(21,101,192,0.4);
+  }
+
+  /* iFrame mapa */
+  .mapa-embed-wrap {
+    flex: 1;
+    position: relative;
+    min-height: 400px;
+  }
+
+  .mapa-embed-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  .mapa-embed-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+  }
+
+  .mapa-embed-overlay.loading {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mapa-loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: mapaSpinAnim 0.8s linear infinite;
+  }
+
+  @keyframes mapaSpinAnim {
+    to { transform: rotate(360deg); }
+  }
+
+  .mapa-embed-overlay p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  /* Contador */
+  .mapa-counter {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .mapa-layout {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+
+    .mapa-sidebar {
+      border-right: none;
+      border-bottom: 1px solid var(--border-color);
+      max-height: 320px;
+    }
+
+    .mapa-embed-wrap {
+      min-height: 340px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mapa-section {
+      padding: 70px 4%;
+    }
+    .mapa-info-card {
+      padding: 14px 16px;
+    }
+    .mapa-info-actions {
+      width: 100%;
+    }
+    .mapa-btn {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+</style>
+
+<section class="mapa-section" id="mapa-interactivo">
+  <div class="section-header">
+    <div class="section-tag">Encuéntranos</div>
+    <h2 class="section-title">MAPA DE <span>SUCURSALES</span></h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="mapa-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="mapa-sidebar">
+      <div class="mapa-sidebar-header">
+        <h3>NUESTRAS <span>TIENDAS</span></h3>
+        <div class="mapa-search-wrap">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          <input type="text" id="mapaSearch" placeholder="Buscar sucursal..." oninput="filtrarMapaSucursales()" autocomplete="off">
+        </div>
+        <div class="mapa-counter" id="mapaCounter">15 sucursales</div>
+      </div>
+      <div class="mapa-lista" id="mapaLista">
+        <!-- ítems generados por JS -->
+      </div>
+      <div class="mapa-no-results" id="mapaNoResults">
+        <span style="font-size:2rem">🔍</span><br>
+        Sin resultados para tu búsqueda
+      </div>
+    </aside>
+
+    <!-- PANEL DERECHO -->
+    <div class="mapa-panel">
+
+      <!-- Tarjeta info -->
+      <div class="mapa-info-card" id="mapaInfoCard">
+        <div class="mapa-info-icon">📍</div>
+        <div class="mapa-info-text">
+          <div class="mapa-info-title" id="mapaInfoTitle">Importadora Autodecor Group</div>
+          <div class="mapa-info-addr" id="mapaInfoAddr">Santa Cruz de la Sierra, Bolivia · Selecciona una sucursal</div>
+        </div>
+        <div class="mapa-info-actions" id="mapaInfoActions">
+          <a href="https://wa.me/59171343728" target="_blank" class="mapa-btn mapa-btn-wa" id="mapaWaBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.126 1.529 5.863L0 24l6.305-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.374l-.36-.213-3.732.979.996-3.638-.235-.374A9.819 9.819 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182c5.431 0 9.818 4.388 9.818 9.818 0 5.431-4.387 9.818-9.818 9.818z"/></svg>
+            WhatsApp
+          </a>
+          <a href="#" target="_blank" class="mapa-btn mapa-btn-maps" id="mapaMapsBtn">
+            📍 Abrir en Maps
+          </a>
+        </div>
+      </div>
+
+      <!-- iFrame embed -->
+      <div class="mapa-embed-wrap">
+        <div class="mapa-embed-overlay loading" id="mapaOverlay">
+          <div class="mapa-loader"></div>
+          <p>Cargando mapa…</p>
+        </div>
+        <iframe
+          id="mapaIframe"
+          src="https://maps.google.com/maps?q=Importadora+Autodecor+Group+Santa+Cruz+Bolivia&output=embed&z=13"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa sucursales Autodecor"
+          onload="document.getElementById('mapaOverlay').classList.remove('loading')">
+        </iframe>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ─── DATOS SUCURSALES ─── */
+  const SUCURSALES = [
+    { id: 'A-1',  nombre: 'Sucursal A-1 · Av. Grigotá',       direccion: '2do anillo, Av. Grigotá #38',                        lat: -17.7756, lng: -63.1827, wa: '59171349403',  principal: false },
+    { id: 'A-2',  nombre: 'Sucursal A-2 · Av. Grigotá #278',  direccion: 'Entre 2do y 3er anillo, Av. Grigotá #278',           lat: -17.7821, lng: -63.1834, wa: '59171343820',  principal: false },
+    { id: 'A-3',  nombre: 'Sucursal A-3 · Cancha Royal',       direccion: 'Av. Roque Aguilera #3940, 3er anillo interno',       lat: -17.7983, lng: -63.1934, wa: '59171343748',  principal: false },
+    { id: 'A-4',  nombre: 'Sucursal A-4 · Castropinto',        direccion: 'Av. Roque Aguilera esq. Castropinto #3580',          lat: -17.7965, lng: -63.1912, wa: '59171343809',  principal: false },
+    { id: 'A-5',  nombre: 'Sucursal A-5 · Cancha Royal',       direccion: 'Av. Roque Aguilera #3940, 3er anillo interno',       lat: -17.7990, lng: -63.1940, wa: '59167709802',  principal: false },
+    { id: 'A-6',  nombre: 'Sucursal A-6 · Radial 16',          direccion: '1/2 cuadra del 3er anillo, Av. Radial 16 #40',       lat: -17.7845, lng: -63.2015, wa: '59171343726',  principal: false },
+    { id: 'A-7',  nombre: 'Sucursal A-7 · Principal',          direccion: 'Calle San Miguel, Doble Vía La Guardia',             lat: -17.8102, lng: -63.1456, wa: '59171639864',  principal: true  },
+    { id: 'A-8',  nombre: 'Sucursal A-8 · 4to Anillo Grigotá', direccion: '4to anillo #4596, 3 cuadras al sur de la Av. Grigotá', lat: -17.7980, lng: -63.1820, wa: '59171343810', principal: false },
+    { id: 'A-9',  nombre: 'Sucursal A-9 · Av. Paraguá',        direccion: 'Av. Paraguá #3600, antes del 4to anillo',            lat: -17.7634, lng: -63.1923, wa: '59171691808',  principal: false },
+    { id: 'A-10', nombre: 'Sucursal A-10 · La Cuchilla',       direccion: 'Av. Moscú #5120, La Cuchilla, 5to anillo',           lat: -17.7523, lng: -63.2145, wa: '59171395080',  principal: false },
+    { id: 'A-11', nombre: 'Sucursal A-11 · 6to Anillo',        direccion: 'Av. 3 Pasos al Frente #5035, 6to anillo',            lat: -17.8234, lng: -63.1678, wa: '59171343740',  principal: false },
+    { id: 'A-12', nombre: 'Sucursal A-12 · Virgen de Cotoca',  direccion: 'Av. Virgen de Cotoca, 5to-6to anillo',               lat: -17.8312, lng: -63.1345, wa: '59171343724',  principal: false },
+    { id: 'A-13', nombre: 'Sucursal A-13 · Plan 3000',         direccion: 'Av. Paurito, Plan 3000, 7mo anillo',                 lat: -17.8456, lng: -63.1234, wa: '59171343731',  principal: false },
+    { id: 'A-14', nombre: 'Sucursal A-14 · Av. Banzer',        direccion: 'Av. Banzer, 7mo-8vo anillo',                         lat: -17.7412, lng: -63.2234, wa: '59171343818',  principal: false },
+    { id: 'A-15', nombre: 'Sucursal A-15 · Montero',           direccion: 'Av. Circunvalación #755, Montero',                   lat: -17.3412, lng: -63.2567, wa: '59171343721',  principal: false },
+  ];
+
+  let sucursalActiva = null;
+
+  /* ─── CONSTRUIR LISTA ─── */
+  function buildLista(filtro) {
+    const lista = document.getElementById('mapaLista');
+    const noRes = document.getElementById('mapaNoResults');
+    const counter = document.getElementById('mapaCounter');
+
+    const q = (filtro || '').toLowerCase().trim();
+    const filtradas = q
+      ? SUCURSALES.filter(s =>
+          s.id.toLowerCase().includes(q) ||
+          s.nombre.toLowerCase().includes(q) ||
+          s.direccion.toLowerCase().includes(q))
+      : SUCURSALES;
+
+    lista.innerHTML = '';
+
+    if (filtradas.length === 0) {
+      noRes.style.display = 'block';
+      counter.textContent = '0 resultados';
+      return;
+    }
+
+    noRes.style.display = 'none';
+    counter.textContent = filtradas.length + (filtradas.length === 1 ? ' sucursal' : ' sucursales');
+
+    filtradas.forEach(function (s) {
+      const div = document.createElement('div');
+      div.className = 'mapa-item' + (sucursalActiva && sucursalActiva.id === s.id ? ' active' : '');
+      div.setAttribute('data-id', s.id);
+      div.innerHTML =
+        '<div class="mapa-item-badge' + (s.principal ? ' main-badge' : '') + '">' + s.id + '</div>' +
+        '<div class="mapa-item-info">' +
+          '<div class="mapa-item-name">' + (s.principal ? '⭐ ' : '') + s.nombre + '</div>' +
+          '<div class="mapa-item-addr">' + s.direccion + '</div>' +
+        '</div>' +
+        '<div class="mapa-item-arrow">›</div>';
+      div.addEventListener('click', function () { seleccionarSucursal(s); });
+      lista.appendChild(div);
+    });
+  }
+
+  /* ─── SELECCIONAR SUCURSAL ─── */
+  function seleccionarSucursal(s) {
+    sucursalActiva = s;
+
+    /* Actualizar estado activo en lista */
+    document.querySelectorAll('.mapa-item').forEach(function (el) {
+      el.classList.toggle('active', el.getAttribute('data-id') === s.id);
+    });
+
+    /* Actualizar tarjeta de info */
+    document.getElementById('mapaInfoTitle').textContent = s.nombre;
+    document.getElementById('mapaInfoAddr').textContent = s.direccion;
+    document.getElementById('mapaWaBtn').href = 'https://wa.me/' + s.wa;
+    var mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + s.lat + ',' + s.lng;
+    document.getElementById('mapaMapsBtn').href = mapsUrl;
+
+    /* Cambiar iframe */
+    var overlay = document.getElementById('mapaOverlay');
+    overlay.classList.add('loading');
+    var embedUrl = 'https://maps.google.com/maps?q=' + s.lat + ',' + s.lng + '&output=embed&z=17';
+    var iframe = document.getElementById('mapaIframe');
+    iframe.src = embedUrl;
+
+    /* En mobile: scroll suave al mapa */
+    if (window.innerWidth <= 900) {
+      document.querySelector('.mapa-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* ─── FILTRO BUSCADOR ─── */
+  window.filtrarMapaSucursales = function () {
+    var q = document.getElementById('mapaSearch').value;
+    buildLista(q);
+  };
+
+  /* ─── OCULTAR OVERLAY AL CARGAR IFRAME ─── */
+  document.getElementById('mapaIframe').addEventListener('load', function () {
+    document.getElementById('mapaOverlay').classList.remove('loading');
+  });
+
+  /* ─── INIT ─── */
+  buildLista('');
+})();
+</script>
+<!-- FIN MAPA -->
+
   <!-- PEDIDO FORM -->
   <section class="pedido-section" id="pedido">
     <div class="pedido-inner">
