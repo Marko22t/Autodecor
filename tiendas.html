@@ -1458,6 +1458,8 @@
 <!-- MAPA INTERACTIVO -->
 <!-- Leaflet.js CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<!-- Leaflet.js JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <style>
   /* ===== MAPA INTERACTIVO – LEAFLET ===== */
@@ -1771,7 +1773,7 @@
   /* Leaflet map container */
   #mapaLeaflet {
     flex: 1;
-    min-height: 460px;
+    min-height: 500px;
     z-index: 1;
   }
 
@@ -1888,7 +1890,7 @@
       border-bottom: 1px solid var(--border-color);
       max-height: 300px;
     }
-    #mapaLeaflet { min-height: 380px; }
+    #mapaLeaflet { min-height: 500px; }
   }
 
   @media (max-width: 480px) {
@@ -1953,9 +1955,6 @@
   </div>
 </section>
 
-<!-- Leaflet.js -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN2GR8U=" crossorigin=""></script>
-
 <script>
 (function () {
   'use strict';
@@ -1968,7 +1967,7 @@
     { id: 'A-4',  nombre: 'Sucursal A-4 · Castropinto',         direccion: 'Av. Roque Aguilera esq. Castropinto #3580',            lat: -17.7965, lng: -63.1912, wa: '59171343809',  principal: false },
     { id: 'A-5',  nombre: 'Sucursal A-5 · Cancha Royal',        direccion: 'Av. Roque Aguilera #3940, 3er anillo interno',         lat: -17.7990, lng: -63.1940, wa: '59167709802',  principal: false },
     { id: 'A-6',  nombre: 'Sucursal A-6 · Radial 16',           direccion: '1/2 cuadra del 3er anillo, Av. Radial 16 #40',         lat: -17.7845, lng: -63.2015, wa: '59171343726',  principal: false },
-    { id: 'A-7',  nombre: 'Sucursal A-7 · Principal',           direccion: 'Calle San Miguel, Doble Vía La Guardia',               lat: -17.8095, lng: -63.2086, wa: '59171639864',  principal: true  },
+    { id: 'A-7',  nombre: 'Sucursal A-7 · Principal',           direccion: 'Calle San Miguel, Doble Vía La Guardia',               lat: -17.8102, lng: -63.1456, wa: '59171639864',  principal: true  },
     { id: 'A-8',  nombre: 'Sucursal A-8 · 4to Anillo Grigotá',  direccion: '4to anillo #4596, 3 cuadras al sur de la Av. Grigotá', lat: -17.7980, lng: -63.1820, wa: '59171343810',  principal: false },
     { id: 'A-9',  nombre: 'Sucursal A-9 · Av. Paraguá',         direccion: 'Av. Paraguá #3600, antes del 4to anillo',              lat: -17.7634, lng: -63.1923, wa: '59171691808',  principal: false },
     { id: 'A-10', nombre: 'Sucursal A-10 · La Cuchilla',        direccion: 'Av. Moscú #5120, La Cuchilla, 5to anillo',             lat: -17.7523, lng: -63.2145, wa: '59171395080',  principal: false },
@@ -1981,7 +1980,7 @@
 
   var sucursalActiva = null;
   var mapaInstance   = null;
-  var marcadores     = {}; // id → { marker, icon, iconActive }
+  var marcadores     = {}; // id → { marker, sucursal }
 
   /* ─── CREAR ICONO SVG PERSONALIZADO ─── */
   function crearIcono(s, activo) {
@@ -2130,10 +2129,16 @@
   };
 
   /* ─── INIT ─── */
-  document.addEventListener('DOMContentLoaded', function() {
+  function start() {
     initMapa();
     buildLista('');
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
 
 })();
 </script>
