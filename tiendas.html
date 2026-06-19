@@ -1456,8 +1456,11 @@
   </section>
 
 <!-- MAPA INTERACTIVO -->
+<!-- Leaflet.js CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
 <style>
-  /* ===== MAPA INTERACTIVO ===== */
+  /* ===== MAPA INTERACTIVO – LEAFLET ===== */
   .mapa-section {
     padding: 100px 5%;
     background: var(--bg-primary);
@@ -1494,7 +1497,7 @@
   .mapa-sidebar-header {
     padding: 22px 20px 16px;
     background: var(--primary);
-    position: relative;
+    flex-shrink: 0;
   }
 
   .mapa-sidebar-header h3 {
@@ -1509,7 +1512,6 @@
     color: var(--secondary);
   }
 
-  /* Buscador */
   .mapa-search-wrap {
     position: relative;
   }
@@ -1541,7 +1543,18 @@
   #mapaSearch::placeholder { color: rgba(255,255,255,0.55); }
   #mapaSearch:focus { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5); }
 
-  /* Lista sucursales */
+  .mapa-counter {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+
   .mapa-lista {
     flex: 1;
     overflow-y: auto;
@@ -1567,9 +1580,7 @@
   .mapa-item::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
+    left: 0; top: 0; bottom: 0;
     width: 3px;
     background: var(--primary);
     transform: scaleY(0);
@@ -1668,15 +1679,16 @@
     display: none;
   }
 
-  /* ── PANEL DERECHO: mapa + info ── */
+  /* ── PANEL DERECHO ── */
   .mapa-panel {
     display: flex;
     flex-direction: column;
     background: var(--bg-secondary);
     transition: background var(--transition-smooth);
+    min-height: 520px;
   }
 
-  /* Tarjeta de info */
+  /* Tarjeta info */
   .mapa-info-card {
     padding: 18px 24px;
     background: var(--bg-card);
@@ -1701,10 +1713,7 @@
     flex-shrink: 0;
   }
 
-  .mapa-info-text {
-    flex: 1;
-    min-width: 0;
-  }
+  .mapa-info-text { flex: 1; min-width: 0; }
 
   .mapa-info-title {
     font-family: var(--font-title);
@@ -1745,92 +1754,128 @@
     white-space: nowrap;
   }
 
-  .mapa-btn-wa {
-    background: #25D366;
-    color: #fff;
-  }
+  .mapa-btn-wa { background: #25D366; color: #fff; }
   .mapa-btn-wa:hover {
     background: #20ba5a;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(37,211,102,0.4);
   }
 
-  .mapa-btn-maps {
-    background: var(--primary);
-    color: #fff;
-  }
+  .mapa-btn-maps { background: var(--primary); color: #fff; }
   .mapa-btn-maps:hover {
     background: var(--primary-hover);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(21,101,192,0.4);
   }
 
-  /* iFrame mapa */
-  .mapa-embed-wrap {
+  /* Leaflet map container */
+  #mapaLeaflet {
     flex: 1;
-    position: relative;
-    min-height: 400px;
+    min-height: 460px;
+    z-index: 1;
   }
 
-  .mapa-embed-wrap iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-  }
-
-  .mapa-embed-overlay {
-    position: absolute;
-    inset: 0;
-    background: var(--bg-secondary);
+  /* Custom marker pin style */
+  .marker-pin {
+    width: 36px;
+    height: 36px;
+    background: var(--primary, #1565c0);
+    border: 3px solid #fff;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.35);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 5;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0;
+    transition: transform 0.2s, background 0.2s;
   }
 
-  .mapa-embed-overlay.loading {
-    opacity: 1;
-    pointer-events: all;
+  .marker-pin.principal {
+    background: #d4af37;
   }
 
-  .mapa-loader {
-    width: 40px;
-    height: 40px;
-    border: 3px solid var(--border-color);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: mapaSpinAnim 0.8s linear infinite;
+  .marker-pin.active-marker {
+    background: #f5c518;
+    transform: rotate(-45deg) scale(1.25);
   }
 
-  @keyframes mapaSpinAnim {
-    to { transform: rotate(360deg); }
+  /* Leaflet popup overrides */
+  .leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    font-family: 'Barlow', sans-serif;
+    padding: 0;
+    overflow: hidden;
   }
 
-  .mapa-embed-overlay p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+  .leaflet-popup-content {
+    margin: 0;
+    width: auto !important;
   }
 
-  /* Contador */
-  .mapa-counter {
+  .popup-inner {
+    padding: 14px 18px;
+    min-width: 200px;
+  }
+
+  .popup-id {
     display: inline-block;
-    background: rgba(255,255,255,0.2);
-    color: rgba(255,255,255,0.9);
+    background: #1565c0;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  .popup-id.principal { background: #d4af37; color: #111; }
+
+  .popup-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    color: #111;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .popup-addr {
+    font-size: 0.78rem;
+    color: #555;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .popup-actions {
+    display: flex;
+    gap: 6px;
+  }
+
+  .popup-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px 10px;
+    border-radius: 6px;
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 1px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-top: 8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
   }
+
+  .popup-btn-wa { background: #25D366; color: #fff; }
+  .popup-btn-wa:hover { background: #20ba5a; }
+  .popup-btn-maps { background: #1565c0; color: #fff; }
+  .popup-btn-maps:hover { background: #0d47a1; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
@@ -1838,32 +1883,19 @@
       grid-template-columns: 1fr;
       grid-template-rows: auto 1fr;
     }
-
     .mapa-sidebar {
       border-right: none;
       border-bottom: 1px solid var(--border-color);
-      max-height: 320px;
+      max-height: 300px;
     }
-
-    .mapa-embed-wrap {
-      min-height: 340px;
-    }
+    #mapaLeaflet { min-height: 380px; }
   }
 
   @media (max-width: 480px) {
-    .mapa-section {
-      padding: 70px 4%;
-    }
-    .mapa-info-card {
-      padding: 14px 16px;
-    }
-    .mapa-info-actions {
-      width: 100%;
-    }
-    .mapa-btn {
-      flex: 1;
-      justify-content: center;
-    }
+    .mapa-section { padding: 70px 4%; }
+    .mapa-info-card { padding: 14px 16px; }
+    .mapa-info-actions { width: 100%; }
+    .mapa-btn { flex: 1; justify-content: center; }
   }
 </style>
 
@@ -1910,70 +1942,123 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.126 1.529 5.863L0 24l6.305-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.374l-.36-.213-3.732.979.996-3.638-.235-.374A9.819 9.819 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182c5.431 0 9.818 4.388 9.818 9.818 0 5.431-4.387 9.818-9.818 9.818z"/></svg>
             WhatsApp
           </a>
-          <a href="#" target="_blank" class="mapa-btn mapa-btn-maps" id="mapaMapsBtn">
-            📍 Abrir en Maps
-          </a>
+          <a href="#" target="_blank" class="mapa-btn mapa-btn-maps" id="mapaMapsBtn">📍 Abrir en Maps</a>
         </div>
       </div>
 
-      <!-- iFrame embed -->
-      <div class="mapa-embed-wrap">
-        <div class="mapa-embed-overlay loading" id="mapaOverlay">
-          <div class="mapa-loader"></div>
-          <p>Cargando mapa…</p>
-        </div>
-        <iframe
-          id="mapaIframe"
-          src="https://maps.google.com/maps?q=Importadora+Autodecor+Group+Santa+Cruz+Bolivia&output=embed&z=13"
-          allowfullscreen
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Mapa sucursales Autodecor"
-          onload="document.getElementById('mapaOverlay').classList.remove('loading')">
-        </iframe>
-      </div>
+      <!-- Leaflet Map -->
+      <div id="mapaLeaflet"></div>
 
     </div>
   </div>
 </section>
+
+<!-- Leaflet.js -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN2GR8U=" crossorigin=""></script>
 
 <script>
 (function () {
   'use strict';
 
   /* ─── DATOS SUCURSALES ─── */
-  const SUCURSALES = [
-    { id: 'A-1',  nombre: 'Sucursal A-1 · Av. Grigotá',       direccion: '2do anillo, Av. Grigotá #38',                        lat: -17.7756, lng: -63.1827, wa: '59171349403',  principal: false },
-    { id: 'A-2',  nombre: 'Sucursal A-2 · Av. Grigotá #278',  direccion: 'Entre 2do y 3er anillo, Av. Grigotá #278',           lat: -17.7821, lng: -63.1834, wa: '59171343820',  principal: false },
-    { id: 'A-3',  nombre: 'Sucursal A-3 · Cancha Royal',       direccion: 'Av. Roque Aguilera #3940, 3er anillo interno',       lat: -17.7983, lng: -63.1934, wa: '59171343748',  principal: false },
-    { id: 'A-4',  nombre: 'Sucursal A-4 · Castropinto',        direccion: 'Av. Roque Aguilera esq. Castropinto #3580',          lat: -17.7965, lng: -63.1912, wa: '59171343809',  principal: false },
-    { id: 'A-5',  nombre: 'Sucursal A-5 · Cancha Royal',       direccion: 'Av. Roque Aguilera #3940, 3er anillo interno',       lat: -17.7990, lng: -63.1940, wa: '59167709802',  principal: false },
-    { id: 'A-6',  nombre: 'Sucursal A-6 · Radial 16',          direccion: '1/2 cuadra del 3er anillo, Av. Radial 16 #40',       lat: -17.7845, lng: -63.2015, wa: '59171343726',  principal: false },
-    { id: 'A-7',  nombre: 'Sucursal A-7 · Principal',          direccion: 'Calle San Miguel, Doble Vía La Guardia',             lat: -17.8102, lng: -63.1456, wa: '59171639864',  principal: true  },
-    { id: 'A-8',  nombre: 'Sucursal A-8 · 4to Anillo Grigotá', direccion: '4to anillo #4596, 3 cuadras al sur de la Av. Grigotá', lat: -17.7980, lng: -63.1820, wa: '59171343810', principal: false },
-    { id: 'A-9',  nombre: 'Sucursal A-9 · Av. Paraguá',        direccion: 'Av. Paraguá #3600, antes del 4to anillo',            lat: -17.7634, lng: -63.1923, wa: '59171691808',  principal: false },
-    { id: 'A-10', nombre: 'Sucursal A-10 · La Cuchilla',       direccion: 'Av. Moscú #5120, La Cuchilla, 5to anillo',           lat: -17.7523, lng: -63.2145, wa: '59171395080',  principal: false },
-    { id: 'A-11', nombre: 'Sucursal A-11 · 6to Anillo',        direccion: 'Av. 3 Pasos al Frente #5035, 6to anillo',            lat: -17.8234, lng: -63.1678, wa: '59171343740',  principal: false },
-    { id: 'A-12', nombre: 'Sucursal A-12 · Virgen de Cotoca',  direccion: 'Av. Virgen de Cotoca, 5to-6to anillo',               lat: -17.8312, lng: -63.1345, wa: '59171343724',  principal: false },
-    { id: 'A-13', nombre: 'Sucursal A-13 · Plan 3000',         direccion: 'Av. Paurito, Plan 3000, 7mo anillo',                 lat: -17.8456, lng: -63.1234, wa: '59171343731',  principal: false },
-    { id: 'A-14', nombre: 'Sucursal A-14 · Av. Banzer',        direccion: 'Av. Banzer, 7mo-8vo anillo',                         lat: -17.7412, lng: -63.2234, wa: '59171343818',  principal: false },
-    { id: 'A-15', nombre: 'Sucursal A-15 · Montero',           direccion: 'Av. Circunvalación #755, Montero',                   lat: -17.3412, lng: -63.2567, wa: '59171343721',  principal: false },
+  var SUCURSALES = [
+    { id: 'A-1',  nombre: 'Sucursal A-1 · Av. Grigotá',        direccion: '2do anillo, Av. Grigotá #38',                          lat: -17.7756, lng: -63.1827, wa: '59171349403',  principal: false },
+    { id: 'A-2',  nombre: 'Sucursal A-2 · Av. Grigotá #278',   direccion: 'Entre 2do y 3er anillo, Av. Grigotá #278',             lat: -17.7821, lng: -63.1834, wa: '59171343820',  principal: false },
+    { id: 'A-3',  nombre: 'Sucursal A-3 · Cancha Royal',        direccion: 'Av. Roque Aguilera #3940, 3er anillo interno',         lat: -17.7983, lng: -63.1934, wa: '59171343748',  principal: false },
+    { id: 'A-4',  nombre: 'Sucursal A-4 · Castropinto',         direccion: 'Av. Roque Aguilera esq. Castropinto #3580',            lat: -17.7965, lng: -63.1912, wa: '59171343809',  principal: false },
+    { id: 'A-5',  nombre: 'Sucursal A-5 · Cancha Royal',        direccion: 'Av. Roque Aguilera #3940, 3er anillo interno',         lat: -17.7990, lng: -63.1940, wa: '59167709802',  principal: false },
+    { id: 'A-6',  nombre: 'Sucursal A-6 · Radial 16',           direccion: '1/2 cuadra del 3er anillo, Av. Radial 16 #40',         lat: -17.7845, lng: -63.2015, wa: '59171343726',  principal: false },
+    { id: 'A-7',  nombre: 'Sucursal A-7 · Principal',           direccion: 'Calle San Miguel, Doble Vía La Guardia',               lat: -17.8095, lng: -63.2086, wa: '59171639864',  principal: true  },
+    { id: 'A-8',  nombre: 'Sucursal A-8 · 4to Anillo Grigotá',  direccion: '4to anillo #4596, 3 cuadras al sur de la Av. Grigotá', lat: -17.7980, lng: -63.1820, wa: '59171343810',  principal: false },
+    { id: 'A-9',  nombre: 'Sucursal A-9 · Av. Paraguá',         direccion: 'Av. Paraguá #3600, antes del 4to anillo',              lat: -17.7634, lng: -63.1923, wa: '59171691808',  principal: false },
+    { id: 'A-10', nombre: 'Sucursal A-10 · La Cuchilla',        direccion: 'Av. Moscú #5120, La Cuchilla, 5to anillo',             lat: -17.7523, lng: -63.2145, wa: '59171395080',  principal: false },
+    { id: 'A-11', nombre: 'Sucursal A-11 · 6to Anillo',         direccion: 'Av. 3 Pasos al Frente #5035, 6to anillo',              lat: -17.8234, lng: -63.1678, wa: '59171343740',  principal: false },
+    { id: 'A-12', nombre: 'Sucursal A-12 · Virgen de Cotoca',   direccion: 'Av. Virgen de Cotoca, 5to-6to anillo',                 lat: -17.8312, lng: -63.1345, wa: '59171343724',  principal: false },
+    { id: 'A-13', nombre: 'Sucursal A-13 · Plan 3000',          direccion: 'Av. Paurito, Plan 3000, 7mo anillo',                   lat: -17.8456, lng: -63.1234, wa: '59171343731',  principal: false },
+    { id: 'A-14', nombre: 'Sucursal A-14 · Av. Banzer',         direccion: 'Av. Banzer, 7mo-8vo anillo',                           lat: -17.7412, lng: -63.2234, wa: '59171343818',  principal: false },
+    { id: 'A-15', nombre: 'Sucursal A-15 · Montero',            direccion: 'Av. Circunvalación #755, Montero',                     lat: -17.3412, lng: -63.2567, wa: '59171343721',  principal: false },
   ];
 
-  let sucursalActiva = null;
+  var sucursalActiva = null;
+  var mapaInstance   = null;
+  var marcadores     = {}; // id → { marker, icon, iconActive }
 
-  /* ─── CONSTRUIR LISTA ─── */
+  /* ─── CREAR ICONO SVG PERSONALIZADO ─── */
+  function crearIcono(s, activo) {
+    var color  = s.principal ? '#d4af37' : (activo ? '#f5c518' : '#1565c0');
+    var border = activo ? '#fff' : '#fff';
+    var scale  = activo ? 1.3 : 1;
+    var svg = [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="' + Math.round(36*scale) + '" height="' + Math.round(44*scale) + '" viewBox="0 0 36 44">',
+        '<path d="M18 0C8.059 0 0 8.059 0 18c0 13.5 18 26 18 26S36 31.5 36 18C36 8.059 27.941 0 18 0z" fill="' + color + '" stroke="' + border + '" stroke-width="2"/>',
+        '<circle cx="18" cy="18" r="8" fill="rgba(255,255,255,0.35)"/>',
+        '<text x="18" y="22" text-anchor="middle" font-family="Bebas Neue,sans-serif" font-size="9" fill="#fff" font-weight="bold">' + s.id + '</text>',
+      '</svg>'
+    ].join('');
+    return L.divIcon({
+      html: svg,
+      className: '',
+      iconSize:   [Math.round(36*scale), Math.round(44*scale)],
+      iconAnchor: [Math.round(18*scale), Math.round(44*scale)],
+      popupAnchor:[0, -Math.round(44*scale)]
+    });
+  }
+
+  /* ─── INICIALIZAR MAPA ─── */
+  function initMapa() {
+    mapaInstance = L.map('mapaLeaflet', {
+      center: [-17.7833, -63.1833],
+      zoom: 12,
+      zoomControl: true,
+      scrollWheelZoom: true
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(mapaInstance);
+
+    SUCURSALES.forEach(function(s) {
+      var icono = crearIcono(s, false);
+      var marker = L.marker([s.lat, s.lng], { icon: icono, title: s.nombre });
+
+      var mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + s.lat + ',' + s.lng;
+      var popupHtml = [
+        '<div class="popup-inner">',
+          '<span class="popup-id' + (s.principal ? ' principal' : '') + '">' + s.id + (s.principal ? ' ⭐ PRINCIPAL' : '') + '</span>',
+          '<div class="popup-name">' + s.nombre + '</div>',
+          '<div class="popup-addr">' + s.direccion + '</div>',
+          '<div class="popup-actions">',
+            '<a href="https://wa.me/' + s.wa + '" target="_blank" class="popup-btn popup-btn-wa">WhatsApp</a>',
+            '<a href="' + mapsUrl + '" target="_blank" class="popup-btn popup-btn-maps">📍 Maps</a>',
+          '</div>',
+        '</div>'
+      ].join('');
+
+      marker.bindPopup(popupHtml, { maxWidth: 280, minWidth: 220 });
+
+      marker.on('click', function() {
+        seleccionarSucursal(s, false);
+      });
+
+      marker.addTo(mapaInstance);
+      marcadores[s.id] = { marker: marker, sucursal: s };
+    });
+  }
+
+  /* ─── CONSTRUIR LISTA SIDEBAR ─── */
   function buildLista(filtro) {
-    const lista = document.getElementById('mapaLista');
-    const noRes = document.getElementById('mapaNoResults');
-    const counter = document.getElementById('mapaCounter');
+    var lista   = document.getElementById('mapaLista');
+    var noRes   = document.getElementById('mapaNoResults');
+    var counter = document.getElementById('mapaCounter');
 
-    const q = (filtro || '').toLowerCase().trim();
-    const filtradas = q
-      ? SUCURSALES.filter(s =>
-          s.id.toLowerCase().includes(q) ||
-          s.nombre.toLowerCase().includes(q) ||
-          s.direccion.toLowerCase().includes(q))
+    var q = (filtro || '').toLowerCase().trim();
+    var filtradas = q
+      ? SUCURSALES.filter(function(s) {
+          return s.id.toLowerCase().includes(q) ||
+                 s.nombre.toLowerCase().includes(q) ||
+                 s.direccion.toLowerCase().includes(q);
+        })
       : SUCURSALES;
 
     lista.innerHTML = '';
@@ -1987,8 +2072,8 @@
     noRes.style.display = 'none';
     counter.textContent = filtradas.length + (filtradas.length === 1 ? ' sucursal' : ' sucursales');
 
-    filtradas.forEach(function (s) {
-      const div = document.createElement('div');
+    filtradas.forEach(function(s) {
+      var div = document.createElement('div');
       div.className = 'mapa-item' + (sucursalActiva && sucursalActiva.id === s.id ? ' active' : '');
       div.setAttribute('data-id', s.id);
       div.innerHTML =
@@ -1998,56 +2083,62 @@
           '<div class="mapa-item-addr">' + s.direccion + '</div>' +
         '</div>' +
         '<div class="mapa-item-arrow">›</div>';
-      div.addEventListener('click', function () { seleccionarSucursal(s); });
+      div.addEventListener('click', function() { seleccionarSucursal(s, true); });
       lista.appendChild(div);
     });
   }
 
   /* ─── SELECCIONAR SUCURSAL ─── */
-  function seleccionarSucursal(s) {
+  function seleccionarSucursal(s, fromSidebar) {
     sucursalActiva = s;
 
-    /* Actualizar estado activo en lista */
-    document.querySelectorAll('.mapa-item').forEach(function (el) {
+    /* Resetear iconos anteriores */
+    Object.keys(marcadores).forEach(function(id) {
+      var m = marcadores[id];
+      m.marker.setIcon(crearIcono(m.sucursal, false));
+    });
+
+    /* Activar icono del seleccionado */
+    if (marcadores[s.id]) {
+      marcadores[s.id].marker.setIcon(crearIcono(s, true));
+      if (fromSidebar) {
+        mapaInstance.setView([s.lat, s.lng], 16, { animate: true });
+        marcadores[s.id].marker.openPopup();
+      }
+    }
+
+    /* Actualizar tarjeta info */
+    document.getElementById('mapaInfoTitle').textContent = s.nombre;
+    document.getElementById('mapaInfoAddr').textContent  = s.direccion;
+    document.getElementById('mapaWaBtn').href   = 'https://wa.me/' + s.wa;
+    document.getElementById('mapaMapsBtn').href = 'https://www.google.com/maps/search/?api=1&query=' + s.lat + ',' + s.lng;
+
+    /* Actualizar lista sidebar */
+    document.querySelectorAll('.mapa-item').forEach(function(el) {
       el.classList.toggle('active', el.getAttribute('data-id') === s.id);
     });
 
-    /* Actualizar tarjeta de info */
-    document.getElementById('mapaInfoTitle').textContent = s.nombre;
-    document.getElementById('mapaInfoAddr').textContent = s.direccion;
-    document.getElementById('mapaWaBtn').href = 'https://wa.me/' + s.wa;
-    var mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + s.lat + ',' + s.lng;
-    document.getElementById('mapaMapsBtn').href = mapsUrl;
-
-    /* Cambiar iframe */
-    var overlay = document.getElementById('mapaOverlay');
-    overlay.classList.add('loading');
-    var embedUrl = 'https://maps.google.com/maps?q=' + s.lat + ',' + s.lng + '&output=embed&z=17';
-    var iframe = document.getElementById('mapaIframe');
-    iframe.src = embedUrl;
-
-    /* En mobile: scroll suave al mapa */
+    /* Mobile: scroll al mapa */
     if (window.innerWidth <= 900) {
       document.querySelector('.mapa-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
   /* ─── FILTRO BUSCADOR ─── */
-  window.filtrarMapaSucursales = function () {
-    var q = document.getElementById('mapaSearch').value;
-    buildLista(q);
+  window.filtrarMapaSucursales = function() {
+    buildLista(document.getElementById('mapaSearch').value);
   };
 
-  /* ─── OCULTAR OVERLAY AL CARGAR IFRAME ─── */
-  document.getElementById('mapaIframe').addEventListener('load', function () {
-    document.getElementById('mapaOverlay').classList.remove('loading');
+  /* ─── INIT ─── */
+  document.addEventListener('DOMContentLoaded', function() {
+    initMapa();
+    buildLista('');
   });
 
-  /* ─── INIT ─── */
-  buildLista('');
 })();
 </script>
 <!-- FIN MAPA -->
+
 
   <!-- PEDIDO FORM -->
   <section class="pedido-section" id="pedido">
