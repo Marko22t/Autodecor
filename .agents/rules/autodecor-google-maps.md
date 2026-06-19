@@ -8,7 +8,6 @@ Tarea: Agregar una sección de mapa interactivo en tiendas.html de Importadora A
 
 REQUISITOS TÉCNICOS:
 - Sin API key: usar Google Maps Embed con modo "search" (iframe src con URL de búsqueda)
-- Para el mapa general usar: https://www.google.com/maps/embed/v1/search?q=Importadora+Autodecor+Santa+Cruz+Bolivia (o similar sin key)
 - Al seleccionar sucursal: cambiar el src del iframe con coordenadas específicas vía JS
 - Sin frameworks, sin librerías externas
 
@@ -21,22 +20,23 @@ DISEÑO:
 - Buscador para filtrar sucursales en tiempo real
 - Tarjeta de info al seleccionar (nombre, dirección, botón WhatsApp, botón "Abrir en Maps")
 
-SUCURSALES (usar estas coordenadas aproximadas de Santa Cruz de la Sierra):
-- A-1: Av. Grigotá #38, 2do anillo | coords: -17.7756, -63.1827
-- A-2: Av. Grigotá #278, entre 2do y 3er anillo | coords: -17.7821, -63.1834
-- A-3: Av. Roque Aguilera #3940, 3er anillo | coords: -17.7983, -63.1934
-- A-4: Av. Roque Aguilera esq. Castropinto #3580 | coords: -17.7965, -63.1912
-- A-5: Av. Roque Aguilera #3940, 3er anillo interno | coords: -17.7990, -63.1940
-- A-6: Av. Radial 16 #40, 3er anillo | coords: -17.7845, -63.2015
-- A-7 (Principal): Calle San Miguel, Doble Vía La Guardia | coords: -17.8102, -63.1456
-- A-8: 4to anillo #4596, Av. Grigotá sur | coords: -17.7980, -63.1820
-- A-9: Av. Paraguá #3600, antes del 4to anillo | coords: -17.7634, -63.1923
-- A-10: Av. Moscú #5120, La Cuchilla, 5to anillo | coords: -17.7523, -63.2145
-- A-11: Av. 3 Pasos al Frente #5035, 6to anillo | coords: -17.8234, -63.1678
-- A-12: Av. Virgen de Cotoca, 5to-6to anillo | coords: -17.8312, -63.1345
-- A-13: Av. Paurito, Plan 3000, 7mo anillo | coords: -17.8456, -63.1234
-- A-14: Av. Banzer, 7mo-8vo anillo | coords: -17.7412, -63.2234
-- A-15: Av. Circunvalación #755, Montero | coords: -17.3412, -63.2567
+SUCURSALES (coordenadas verificadas de Google Maps):
+- A-0: Importadora AUTO DECOR GROUP (A0) | lat: -17.8099091, lng: -63.1937994
+- A-1: Importadora Auto Decor Parts A1 | lat: -17.807548, lng: -63.1960457
+- A-2: Av. Grigotá #278 | lat: -17.7994666, lng: -63.1946451
+- A-3: Av. Roque Aguilera #3940, 3er anillo (Cancha Royal) | lat: -17.7983, lng: -63.1934 (aproximada)
+- A-4: Av. Roque Aguilera esq. Castropinto #3580 | lat: -17.7965, lng: -63.1912 (aproximada)
+- A-5: Importadora AUTO DECOR GROUP Kia/Hyundai, Av. Roque Aguilera | lat: -17.8054963, lng: -63.1981703
+- A-6: Av. Radial 16 #40, Club Hípico, 3er anillo | lat: -17.8117, lng: -63.1969 (aproximada)
+- A-7 (Principal): Calle San Miguel, Doble Vía La Guardia | lat: -17.809541, lng: -63.2060247
+- A-8: Importadora AUTO DECOR GROUP (A8), Av. Roque Aguilera | lat: -17.8053495, lng: -63.1982955
+- A-9: AUTO DECOR GROUP PARAGUÁ, Av. Paraguá | lat: -17.7668332, lng: -63.1509466
+- A-10: AUTO DECOR GROUP PAMPA-A3 | lat: -17.7703583, lng: -63.1200507
+- A-11: Importadora AUTO DECOR GROUP (A11), Av. Grigotá 32 | lat: -17.7983472, lng: -63.1934053
+- A-12: Importadora AUTO DECOR GROUP (A9) | lat: -17.8013323, lng: -63.1346617
+- A-13: AUTO DECOR GROUP PLAN 3000 PAURITO, Av. Paurito | lat: -17.8294059, lng: -63.138579
+- A-14: Auto Decor Banzer | lat: -17.7607853, lng: -63.1798748
+- A-15: Av. Circunvalación #755, Montero | lat: -17.3400, lng: -63.2567 (aproximada)
 
 OUTPUT:
 - Dame UN solo bloque de código para insertar en tiendas.html
