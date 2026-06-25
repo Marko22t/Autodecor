@@ -1,0 +1,178 @@
+mapa-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 0;
+    max-width: 1280px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    border: 1px solid var(--border-color);
+    min-height: 620px;
+  }
+
+  /* ── SIDEBAR ── */
+  .mapa-sidebar {
+    background: var(--bg-card);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: background var(--transition-smooth), border-color var(--transition-smooth);
+  }
+
+  .mapa-sidebar-header {
+    padding: 22px 20px 16px;
+    background: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .mapa-sidebar-header h3 {
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .mapa-sidebar-header h3 span {
+    color: var(--secondary);
+  }
+
+  .mapa-search-wrap {
+    position: relative;
+  }
+
+  .mapa-search-wrap svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    fill: #8baed4;
+    pointer-events: none;
+  }
+
+  #mapaSearch {
+    width: 100%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    padding: 10px 14px 10px 38px;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  #mapaSearch::placeholder { color: rgba(255,255,255,0.55); }
+  #mapaSearch:focus { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5); }
+
+  .mapa-counter {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+
+  .mapa-lista {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+
+  .mapa-lista::-webkit-scrollbar { width: 5px; }
+  .mapa-lista::-webkit-scrollbar-track { background: transparent; }
+  .mapa-lista::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+
+  .mapa-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mapa-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--primary);
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
+  }
+
+  body.dark-mode .mapa-item::before { background: var(--secondary); }
+
+  .mapa-item:hover,
+  .mapa-item.active {
+    background: rgba(21, 101, 192, 0.07);
+    padding-left: 24px;
+  }
+
+  body.dark-mode .mapa-item:hover,
+  body.dark-mode .mapa-item.active {
+    background: rgba(245, 197, 24, 0.06);
+  }
+
+  .mapa-item:hover::before,
+  .mapa-item.active::before { transform: scaleY(1); }
+
+  .mapa-item-badge {
+    min-width: 38px;
+    height: 38px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-title);
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .mapa-item.active .mapa-item-badge {
+    background: var(--secondary);
+    color: #111;
+  }
+
+  .mapa-item-badge.main-badge {
+    background: linear-gradient(135deg, #d4af37, #b8940f);
+  }
+
+  .mapa-item-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mapa-item-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-smooth);
+  }
+
+  .mapa-item-addr {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden

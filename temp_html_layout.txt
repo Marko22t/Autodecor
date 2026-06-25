@@ -1,0 +1,54 @@
+<div class="mapa-layout">
+
+          <!-- SIDEBAR -->
+    <aside class="mapa-sidebar">
+      <div class="mapa-sidebar-header">
+        <h3>NUESTRAS <span>TIENDAS</span></h3>
+        <div class="mapa-search-wrap">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          <input type="text" id="mapaSearch" placeholder="Buscar sucursal..." oninput="filtrarMapaSucursales()" autocomplete="off">
+        </div>
+        <div class="mapa-counter" id="mapaCounter">16 sucursales</div>
+      </div>
+      <div class="mapa-lista" id="mapaLista">
+        <!-- ítems generados por JS -->
+      </div>
+      <div class="mapa-no-results" id="mapaNoResults">
+        <span style="font-size:2rem">🔍</span><br>
+        Sin resultados para tu búsqueda
+    </div>
+    </aside>
+
+    <!-- PANEL DERECHO -->
+    <div class="mapa-panel">
+
+      <!-- Tarjeta info -->
+      <div class="mapa-info-card" id="mapaInfoCard">
+        <div class="mapa-info-icon">📍</div>
+        <div class="mapa-info-text">
+          <div class="mapa-info-title" id="mapaInfoTitle">Importadora Autodecor Group</div>
+          <div class="mapa-info-addr" id="mapaInfoAddr">Santa Cruz de la Sierra, Bolivia · Selecciona una sucursal</div>
+        </div>
+        <div class="mapa-info-actions" id="mapaInfoActions">
+          <a href="https://wa.me/59171343728" target="_blank" class="mapa-btn mapa-btn-wa" id="mapaWaBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.126 1.529 5.863L0 24l6.305-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.374l-.36-.213-3.732.979.996-3.638-.235-.374A9.819 9.819 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182c5.431 0 9.818 4.388 9.818 9.818 0 5.431-4.387 9.818-9.818 9.818z"/></svg>
+            WhatsApp
+          </a>
+          <a href="#" target="_blank" class="mapa-btn mapa-btn-maps" id="mapaMapsBtn">📍 Abrir en Maps</a>
+        </div>
+      </div>
+
+      <!-- Leaflet Map -->
+      <div id="mapaLeaflet"></div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ─── DATOS SUCURSALES ─── */
+  var SUCURSALES = [
+    { id: 'A-0',  nombre: 'Impo

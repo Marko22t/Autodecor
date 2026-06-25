@@ -1,0 +1,20 @@
+iv>
+
+      <div class="tienda-card">
+        <span class="tienda-badge">Sucursal A-1</span>
+        <h3>Importadora Auto Decor Parts A1</h3>
+        <div class="tienda-info">
+          <div class="tienda-info-row">
+            <span class="icon">📍</span>
+            <span>2do anillo, Av. Grigotá #38</span>
+          </div>
+          <div class="tienda-info-row">
+            <span class="icon">📱</span>
+            <a href="https://wa.me/59171349403" target="_blank">71349403</a>
+          </div>
+          <div class="tienda-info-row">
+            <span class="icon">📞</span>
+            <a href="tel:+59133598338">3-598338</a>
+          </div>
+        </div>
+        <a href="https://www.google.c

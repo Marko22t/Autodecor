@@ -1,0 +1,32 @@
+y);
+    transform: translateX(3px);
+  }
+
+  body.dark-mode .mapa-item.active .mapa-item-arrow,
+  body.dark-mode .mapa-item:hover .mapa-item-arrow {
+    color: var(--secondary);
+  }
+
+  .mapa-no-results {
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    display: none;
+  }
+
+  /* ── PANEL DERECHO ── */
+  .mapa-panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-secondary);
+    transition: background var(--transition-smooth);
+    min-height: 520px;
+  }
+
+  /* Tarjeta info */
+  .mapa-info-card {
+    padding: 18px 24px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    display: fle
