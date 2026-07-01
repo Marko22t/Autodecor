@@ -306,12 +306,15 @@
 
     /* PAGE HERO */
     .page-hero {
-      height: 340px;
+      height: 350px;
       display: flex;
       align-items: center;
       padding: 0 5%;
       position: relative;
-      background: url('img/productos-autodecor.png') center/cover no-repeat;
+      background-image: url('img/Autodecor_hero_final3.jpeg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center;
       margin-top: 72px;
     }
 
@@ -319,7 +322,8 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(10, 10, 10, 0.95) 40%, rgba(10, 10, 10, 0.4) 100%);
+      /* Degradado mucho más suave para no tapar la imagen */
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 60%);
     }
 
     .page-hero-content {
@@ -353,6 +357,7 @@
       line-height: 0.95;
       margin-bottom: 16px;
       color: #fff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     }
 
     .page-hero-title span {
@@ -360,10 +365,12 @@
     }
 
     .page-hero-desc {
-      color: #ccc;
-      font-size: 1rem;
+      color: #f3f4f6;
+      font-size: 1.1rem;
+      font-weight: 500;
       line-height: 1.7;
       max-width: 500px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
     }
 
     /* SECTION COMMON */
