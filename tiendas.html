@@ -313,15 +313,16 @@
       align-items: center;
       padding: 0 5%;
       position: relative;
-      background: url('img/tienda-autodecor.png') center/cover no-repeat;
+      background: url('img/tiendas/Sucursal A0.jpg.jpeg') center/cover no-repeat;
       margin-top: 72px;
+      transition: background-image 1s ease-in-out;
     }
 
     .page-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(10, 10, 10, 0.95) 40%, rgba(10, 10, 10, 0.4) 100%);
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.15) 100%);
     }
 
     .page-hero-content {
@@ -355,6 +356,7 @@
       line-height: 0.95;
       margin-bottom: 16px;
       color: #fff;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .page-hero-title span {
@@ -362,10 +364,12 @@
     }
 
     .page-hero-desc {
-      color: #ccc;
+      color: #f3f4f6;
       font-size: 1rem;
       line-height: 1.7;
       max-width: 500px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      font-weight: 500;
     }
 
     /* HORARIO BANNER */
@@ -478,13 +482,45 @@
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 40px 32px;
+      padding: 0;
       transition: var(--transition-smooth);
       position: relative;
       overflow: hidden;
       box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
+    }
+
+    .tienda-card-img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+      border-radius: 0;
+      transition: transform 0.5s ease;
+    }
+
+    .tienda-card:hover .tienda-card-img {
+      transform: scale(1.04);
+    }
+
+    .tienda-card-no-img {
+      width: 100%;
+      height: 190px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--border-color) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--text-muted);
+      transition: background var(--transition-smooth);
+    }
+
+    .tienda-card-body {
+      padding: 28px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
     }
 
     .tienda-card::before {
@@ -496,6 +532,7 @@
       height: 0;
       background: var(--primary);
       transition: height 0.4s ease;
+      z-index: 2;
     }
 
     body.dark-mode .tienda-card::before {
@@ -526,7 +563,7 @@
       text-transform: uppercase;
       padding: 5px 12px;
       border-radius: 4px;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       align-self: flex-start;
       transition: var(--transition-smooth);
     }
@@ -971,6 +1008,15 @@
         grid-template-columns: 1fr;
         gap: 30px;
       }
+
+      .page-hero {
+        height: 280px;
+        background-position: center;
+      }
+
+      .page-hero::before {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+      }
     }
 
     @media(max-width: 480px) {
@@ -1085,7 +1131,7 @@
     <a href="tiendas.html" class="active">Tiendas</a>
   </div>
 
-  <section class="page-hero">
+  <section class="page-hero" id="hero-carousel">
     <div class="page-hero-content">
       <div class="page-hero-tag">Encuéntranos</div>
       <h1 class="page-hero-title">NUESTRAS <span>TIENDAS</span></h1>
@@ -1120,263 +1166,330 @@
     <div class="tiendas-grid">
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-0</span>
-        <h3>1/2 cuadra del 3er anillo interno</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>1/2 cuadra 3er anillo, Av. Radial 16</span>
+        <img src="img/tiendas/Sucursal A0.jpg.jpeg" alt="Sucursal A-0" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-0</span>
+          <h3>1/2 cuadra del 3er anillo interno</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>1/2 cuadra 3er anillo, Av. Radial 16</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133542131">3-542131</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133542131">3-542131</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(A0)/@-17.7995636,-63.2034136,14z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1683857!2d-17.7846959!4e1!1m6!1m2!1s0x93f1e9002bcca927:0x95be2c3f99d9f78e!2sImportadora+AUTO+DECOR+GROUP+(A0),+5RQ4%2BXJ2,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1937995!2d-17.8099087!3m5!1s0x93f1e9002bcca927:0x95be2c3f99d9f78e!8m2!3d-17.8099091!4d-63.1937994!16s%2Fg%2F11whpdf_b5?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(A0)/@-17.7995636,-63.2034136,14z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1683857!2d-17.7846959!4e1!1m6!1m2!1s0x93f1e9002bcca927:0x95be2c3f99d9f78e!2sImportadora+AUTO+DECOR+GROUP+(A0),+5RQ4%2BXJ2,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1937995!2d-17.8099087!3m5!1s0x93f1e9002bcca927:0x95be2c3f99d9f78e!8m2!3d-17.8099091!4d-63.1937994!16s%2Fg%2F11whpdf_b5?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-1</span>
-        <h3>3er Anillo interno</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Av. Roque Aguilera 3er anillo interno, entre Escuadrón Velasco y Alto San Pedro</span>
+        <img src="img/tiendas/Sucursal A1.jpg.jpeg" alt="Sucursal A-1" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-1</span>
+          <h3>3er Anillo interno</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Av. Roque Aguilera 3er anillo interno, entre Escuadrón Velasco y Alto San Pedro</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133556190">3-556190</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133556190">3-556190</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+%22Auto+Decor+Parts%22+A1/@-17.8075336,-63.2290006,14z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e825c61f1021:0x129c8be685c21c57!2sImportadora+%22Auto+Decor+Parts%22+A1,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1960364!2d-17.8075417!3m5!1s0x93f1e825c61f1021:0x129c8be685c21c57!8m2!3d-17.807548!4d-63.1960457!16s%2Fg%2F11gcm2ckw_?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+%22Auto+Decor+Parts%22+A1/@-17.8075336,-63.2290006,14z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e825c61f1021:0x129c8be685c21c57!2sImportadora+%22Auto+Decor+Parts%22+A1,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1960364!2d-17.8075417!3m5!1s0x93f1e825c61f1021:0x129c8be685c21c57!8m2!3d-17.807548!4d-63.1960457!16s%2Fg%2F11gcm2ckw_?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-2</span>
-        <h3>2do y 3er anillo</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>2do y 3er anillo, Av. Grigotá #278</span>
+        <img src="img/tiendas/Sucursal A2.jpg.jpeg" alt="Sucursal A-2" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-2</span>
+          <h3>2do y 3er anillo</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>2do y 3er anillo, Av. Grigotá #278</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133537899">3-537899</a>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133548252">3-548252</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133537899">3-537899</a>
-          </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133548252">3-548252</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+%22Auto+Decor+Parts%22+A2/@-17.7923809,-63.2004489,14z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e91165f32881:0xa94aea7d0100f958!2sImportadora+%22Auto+Decor+Parts%22+A2,+Av.+Grigot%C3%A1+278,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1946451!2d-17.7994666!3m5!1s0x93f1e91165f32881:0xa94aea7d0100f958!8m2!3d-17.7994666!4d-63.1946451!16s%2Fg%2F11rylgjjry?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+%22Auto+Decor+Parts%22+A2/@-17.7923809,-63.2004489,14z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e91165f32881:0xa94aea7d0100f958!2sImportadora+%22Auto+Decor+Parts%22+A2,+Av.+Grigot%C3%A1+278,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1946451!2d-17.7994666!3m5!1s0x93f1e91165f32881:0xa94aea7d0100f958!8m2!3d-17.7994666!4d-63.1946451!16s%2Fg%2F11rylgjjry?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-3</span>
-        <h3>Zona de la Pampa</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Zona Pampa de la Isla, entre 6to y 7mo anillo, diagonal Surt. La Pascana</span>
+        <img src="img/tiendas/Sucursal A3.jpg.jpeg" alt="Sucursal A-3" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-3</span>
+          <h3>Zona de la Pampa</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Zona Pampa de la Isla, entre 6to y 7mo anillo, diagonal Surt. La Pascana</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133485145">3-485145</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133485145">3-485145</a>
-          </div>
+          <a href="https://www.google.com/maps/place/AUTO+DECOR+GROUP+PAMPA-A3/@-17.7777827,-63.2054356,12.25z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e93583c84f75:0x4a75a1fc8ce6a647!2sAUTO+DECOR+GROUP+PAMPA-A3,+000000!2m2!1d-63.1200507!2d-17.7703583!3m5!1s0x93f1e93583c84f75:0x4a75a1fc8ce6a647!8m2!3d-17.7703583!4d-63.1200507!16s%2Fg%2F11t36p9rc3?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/AUTO+DECOR+GROUP+PAMPA-A3/@-17.7777827,-63.2054356,12.25z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e93583c84f75:0x4a75a1fc8ce6a647!2sAUTO+DECOR+GROUP+PAMPA-A3,+000000!2m2!1d-63.1200507!2d-17.7703583!3m5!1s0x93f1e93583c84f75:0x4a75a1fc8ce6a647!8m2!3d-17.7703583!4d-63.1200507!16s%2Fg%2F11t36p9rc3?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-4</span>
-        <h3>Zona Plan 3000</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Av. Paurito, zona el Plan 3000, (1/2 cuadra pasando el 7mo anillo)</span>
+        <img src="img/tiendas/Sucursal A4.jpg.jpeg" alt="Sucursal A-4" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-4</span>
+          <h3>Zona Plan 3000</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Av. Paurito, zona el Plan 3000, (1/2 cuadra pasando el 7mo anillo)</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133621567">3-621567</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133621567">3-621567</a>
-          </div>
+          <a href="https://www.google.com/maps/place/AUTO+DECOR+GROUP+PLAN+3000+PAURITO/@-17.8013407,-63.2021376,12.5z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e99e10f0688f:0xbd4486e4429d8743!2sAUTO+DECOR+GROUP+PLAN+3000+PAURITO,+pasando+la,+Entel+-+Plan+3000,+Sobre+la+Av.+Paurito,+Av.+Principal+Plan+3+Mil,+Santa+Cruz+de+la+Sierra!2m2!1d-63.138579!2d-17.8294059!3m5!1s0x93f1e99e10f0688f:0xbd4486e4429d8743!8m2!3d-17.8294059!4d-63.138579!16s%2Fg%2F11vqpd78tc?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/AUTO+DECOR+GROUP+PLAN+3000+PAURITO/@-17.8013407,-63.2021376,12.5z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e99e10f0688f:0xbd4486e4429d8743!2sAUTO+DECOR+GROUP+PLAN+3000+PAURITO,+pasando+la,+Entel+-+Plan+3000,+Sobre+la+Av.+Paurito,+Av.+Principal+Plan+3+Mil,+Santa+Cruz+de+la+Sierra!2m2!1d-63.138579!2d-17.8294059!3m5!1s0x93f1e99e10f0688f:0xbd4486e4429d8743!8m2!3d-17.8294059!4d-63.138579!16s%2Fg%2F11vqpd78tc?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-7</span>
-        <h3>Av. Paraguá</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Av. Paraguá #3600, (3 cuadras antes del 4to anillo)</span>
+        <img src="img/tiendas/Sucursal A7.jpg.jpeg" alt="Sucursal A-7" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-7</span>
+          <h3>Av. Paraguá</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Av. Paraguá #3600, (3 cuadras antes del 4to anillo)</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133488925">3-488925</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133488925">3-488925</a>
-          </div>
+          <a href="https://www.google.com/maps/place/AUTO+DECOR+GROUP+PARAGU%C3%81/@-17.7744682,-63.2016143,13z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e62bdacdc171:0x38fb0ce88807c695!2sAUTO+DECOR+GROUP+PARAGU%C3%81,+Av.+Paragu%C3%A1,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1509466!2d-17.7668332!3m5!1s0x93f1e62bdacdc171:0x38fb0ce88807c695!8m2!3d-17.7668332!4d-63.1509466!16s%2Fg%2F11cnb6q2cv?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/AUTO+DECOR+GROUP+PARAGU%C3%81/@-17.7744682,-63.2016143,13z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e62bdacdc171:0x38fb0ce88807c695!2sAUTO+DECOR+GROUP+PARAGU%C3%81,+Av.+Paragu%C3%A1,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1509466!2d-17.7668332!3m5!1s0x93f1e62bdacdc171:0x38fb0ce88807c695!8m2!3d-17.7668332!4d-63.1509466!16s%2Fg%2F11cnb6q2cv?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-8</span>
-        <h3>3er anillo interno</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Av. Roque Aguilera #3940, 3er anillo interno (diagonal a la cancha Royal)</span>
+        <img src="img/tiendas/Sucursal A8.jpg.jpeg" alt="Sucursal A-8" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-8</span>
+          <h3>3er anillo interno</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Av. Roque Aguilera #3940, 3er anillo interno (diagonal a la cancha Royal)</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133558591">3-558591</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133558591">3-558591</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(A8)/@-17.7798426,-63.2362724,12.5z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e90003a44f8d:0x5634a62ad89e072b!2sImportadora+AUTO+DECOR+GROUP+(A8),+5RV2%2BQJC,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1982962!2d-17.80535!3m5!1s0x93f1e90003a44f8d:0x5634a62ad89e072b!8m2!3d-17.8053495!4d-63.1982955!16s%2Fg%2F11w98lnypl?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(A8)/@-17.7798426,-63.2362724,12.5z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e90003a44f8d:0x5634a62ad89e072b!2sImportadora+AUTO+DECOR+GROUP+(A8),+5RV2%2BQJC,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1982962!2d-17.80535!3m5!1s0x93f1e90003a44f8d:0x5634a62ad89e072b!8m2!3d-17.8053495!4d-63.1982955!16s%2Fg%2F11w98lnypl?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-9</span>
-        <h3>Zona Villa 1ro de Mayo</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Av. 3 pasos al frente, 6to anillo #5035</span>
+        <img src="img/tiendas/Sucursal A9.jpg.jpeg" alt="Sucursal A-9" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-9</span>
+          <h3>Zona Villa 1ro de Mayo</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Av. 3 pasos al frente, 6to anillo #5035</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133640162">3-640162</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133640162">3-640162</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(A9)/@-17.7985425,-63.1878624,12.75z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e9003c60320b:0xa80349d34c3a4a2b!2sImportadora+AUTO+DECOR+GROUP+(A9),+5VX8%2BF44,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1346636!2d-17.801357!3m5!1s0x93f1e9003c60320b:0xa80349d34c3a4a2b!8m2!3d-17.8013323!4d-63.1346617!16s%2Fg%2F11lp7_24pw?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(A9)/@-17.7985425,-63.1878624,12.75z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e9003c60320b:0xa80349d34c3a4a2b!2sImportadora+AUTO+DECOR+GROUP+(A9),+5VX8%2BF44,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1346636!2d-17.801357!3m5!1s0x93f1e9003c60320b:0xa80349d34c3a4a2b!8m2!3d-17.8013323!4d-63.1346617!16s%2Fg%2F11lp7_24pw?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-10</span>
-        <h3>5to anillo</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>5to anillo, Av. Moscú, zona la cuchilla #5120</span>
+        <div class="tienda-card-no-img">🏪</div>
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-10</span>
+          <h3>5to anillo</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>5to anillo, Av. Moscú, zona la cuchilla #5120</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133550222">3-550222</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133550222">3-550222</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Autodecor/@-17.8284523,-63.2346225,14z/data=!4m10!1m2!2m1!1sautodecor!3m6!1s0x93f1e9cea3603225:0x8d0e2ed09d832ba!8m2!3d-17.8284198!4d-63.2016493!15sCglhdXRvZGVjb3JaCyIJYXV0b2RlY29ykgEVdXNlZF9hdXRvX3BhcnRzX3N0b3Jl4AEA!16s%2Fg%2F11j8wvpldy?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Autodecor/@-17.8284523,-63.2346225,14z/data=!4m10!1m2!2m1!1sautodecor!3m6!1s0x93f1e9cea3603225:0x8d0e2ed09d832ba!8m2!3d-17.8284198!4d-63.2016493!15sCglhdXRvZGVjb3JaCyIJYXV0b2RlY29ykgEVdXNlZF9hdXRvX3BhcnRzX3N0b3Jl4AEA!16s%2Fg%2F11j8wvpldy?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-11</span>
-        <h3>2do anillo</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>2do anillo, Av. Grigotá #38</span>
+        <img src="img/tiendas/Sucursal A11.jpg.jpeg" alt="Sucursal A-11" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-11</span>
+          <h3>2do anillo</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>2do anillo, Av. Grigotá #38</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133598338">3-598338</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133598338">3-598338</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(A11)/@-17.7924626,-63.2171859,13z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e90006237ab7:0xd92a0fe1a307072a!2sImportadora+AUTO+DECOR+GROUP+(A11),+Av.+Grigot%C3%A1+32,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1934053!2d-17.7983472!3m5!1s0x93f1e90006237ab7:0xd92a0fe1a307072a!8m2!3d-17.7983472!4d-63.1934053!16s%2Fg%2F11lp7zz72n?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(A11)/@-17.7924626,-63.2171859,13z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e90006237ab7:0xd92a0fe1a307072a!2sImportadora+AUTO+DECOR+GROUP+(A11),+Av.+Grigot%C3%A1+32,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1934053!2d-17.7983472!3m5!1s0x93f1e90006237ab7:0xd92a0fe1a307072a!8m2!3d-17.7983472!4d-63.1934053!16s%2Fg%2F11lp7zz72n?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-12</span>
-        <h3>3er Anillo Interno (Hyundai / Kia)</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Av. Roque Aguilera #3940, 3er anillo interno</span>
+        <img src="img/tiendas/Sucursal A12.jpg.jpeg" alt="Sucursal A-12" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-12</span>
+          <h3>3er Anillo Interno (Hyundai / Kia)</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Av. Roque Aguilera #3940, 3er anillo interno</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133558590">3-558590</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133558590">3-558590</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(Kia,+Hyundai)/@-17.7917588,-63.2139113,13.25z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e9006bff4205:0x58f7641f9ae9d7d3!2sImportadora+AUTO+DECOR+GROUP+(Kia,+Hyundai),+5RV2%2BPRJ,+Av.+Roque+Aguilera,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1981703!2d-17.8054963!3m5!1s0x93f1e9006bff4205:0x58f7641f9ae9d7d3!8m2!3d-17.8054963!4d-63.1981703!16s%2Fg%2F11whphcm8n?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(Kia,+Hyundai)/@-17.7917588,-63.2139113,13.25z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e9006bff4205:0x58f7641f9ae9d7d3!2sImportadora+AUTO+DECOR+GROUP+(Kia,+Hyundai),+5RV2%2BPRJ,+Av.+Roque+Aguilera,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1981703!2d-17.8054963!3m5!1s0x93f1e9006bff4205:0x58f7641f9ae9d7d3!8m2!3d-17.8054963!4d-63.1981703!16s%2Fg%2F11whphcm8n?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-16</span>
-        <h3>Ciudad de Montero</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Av. Circunvalación, Montero</span>
+        <img src="img/tiendas/Sucursal A16.jpg.jpeg" alt="Sucursal A-16" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-16</span>
+          <h3>Ciudad de Montero</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Av. Circunvalación, Montero</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59179225335">9-225335</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59179225335">9-225335</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+Auto+Decor+sucursal+Montero/@-17.7100882,-63.6832428,9z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93ee3d21244a0b3b:0x5467fa213b82bfe8!2sImportadora+Auto+Decor+sucursal+Montero,+Circunvalaci%C3%B3n+2do+Anillo+rotonda,+Montero!2m2!1d-63.2491338!2d-17.3519002!3m5!1s0x93ee3d21244a0b3b:0x5467fa213b82bfe8!8m2!3d-17.3519002!4d-63.2491338!16s%2Fg%2F11s_vf3hhh?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+Auto+Decor+sucursal+Montero/@-17.7100882,-63.6832428,9z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93ee3d21244a0b3b:0x5467fa213b82bfe8!2sImportadora+Auto+Decor+sucursal+Montero,+Circunvalaci%C3%B3n+2do+Anillo+rotonda,+Montero!2m2!1d-63.2491338!2d-17.3519002!3m5!1s0x93ee3d21244a0b3b:0x5467fa213b82bfe8!8m2!3d-17.3519002!4d-63.2491338!16s%2Fg%2F11s_vf3hhh?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-18</span>
-        <h3>Av. Banzer</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Av. Banzer, entre 7mo y 8vo anillo</span>
+        <img src="img/tiendas/Sucursal A18.jpg.jpeg" alt="Sucursal A-18" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-18</span>
+          <h3>Av. Banzer</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Av. Banzer, entre 7mo y 8vo anillo</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133706232">3-706232</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133706232">3-706232</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+AutoDecor+Banzer/@-17.7880637,-63.3077344,11z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e785431d41dd:0x3cc00f98aa676bb!2sImportadora+AutoDecor+Banzer,+7RHP%2B77G,+RN+4,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1644354!2d-17.7220507!3m5!1s0x93f1e785431d41dd:0x3cc00f98aa676bb!8m2!3d-17.7220507!4d-63.1644354!16s%2Fg%2F11q9txrbm2?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+AutoDecor+Banzer/@-17.7880637,-63.3077344,11z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e785431d41dd:0x3cc00f98aa676bb!2sImportadora+AutoDecor+Banzer,+7RHP%2B77G,+RN+4,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1644354!2d-17.7220507!3m5!1s0x93f1e785431d41dd:0x3cc00f98aa676bb!8m2!3d-17.7220507!4d-63.1644354!16s%2Fg%2F11q9txrbm2?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge main">⭐ Sucursal A-21 · Central</span>
-        <h3>3er y 4to Anillo · Doble Vía · Central</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Entre 3er y 4to anillo, doble vía a La Guardia #3590</span>
+        <img src="img/tiendas/Sucursal A21.jpg.jpeg" alt="Sucursal A-21" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge main">⭐ Sucursal A-21 · Central</span>
+          <h3>3er y 4to Anillo · Doble Vía · Central</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Entre 3er y 4to anillo, doble vía a La Guardia #3590</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133596851">3-596851</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133596851">3-596851</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+Auto+Decor/@-17.7993027,-63.2565164,12z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1c29d1ff1fc89:0x9bdba476f0b43021!2sImportadora+Auto+Decor,+5QRV%2B5HQ,+y+Calle+San+Miguel,+Doble+v%C3%ADa+La+Guardia,+Santa+Cruz+de+la+Sierra!2m2!1d-63.2060432!2d-17.809522!3m5!1s0x93f1c29d1ff1fc89:0x9bdba476f0b43021!8m2!3d-17.809541!4d-63.2060247!16s%2Fg%2F11d_d0ztyh?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+Auto+Decor/@-17.7993027,-63.2565164,12z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1c29d1ff1fc89:0x9bdba476f0b43021!2sImportadora+Auto+Decor,+5QRV%2B5HQ,+y+Calle+San+Miguel,+Doble+v%C3%ADa+La+Guardia,+Santa+Cruz+de+la+Sierra!2m2!1d-63.2060432!2d-17.809522!3m5!1s0x93f1c29d1ff1fc89:0x9bdba476f0b43021!8m2!3d-17.809541!4d-63.2060247!16s%2Fg%2F11d_d0ztyh?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-22</span>
-        <h3>3er anillo interno · Repuestos Originales</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>Av. Roque Aguilera, 3er anillo interno, esquina Castropinto #3580</span>
+        <img src="img/tiendas/Sucursal A22.jpg.jpeg" alt="Sucursal A-22" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-22</span>
+          <h3>3er anillo interno · Repuestos Originales</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Av. Roque Aguilera, 3er anillo interno, esquina Castropinto #3580</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133542131">3-542131</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133542131">3-542131</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(A22)/@-17.8149566,-63.2175216,13z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e90052135275:0xa392a3e49075b361!2sImportadora+AUTO+DECOR+GROUP+(A22),+Av.+Roque+Aguilera,+entre+la+calle+Michel+Castro+Pinto+y,+Destacamento+450,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1963933!2d-17.8071881!3m5!1s0x93f1e90052135275:0xa392a3e49075b361!8m2!3d-17.8071881!4d-63.1963933!16s%2Fg%2F11w98ldl2m?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Importadora+AUTO+DECOR+GROUP+(A22)/@-17.8149566,-63.2175216,13z/data=!4m20!1m13!4m12!1m4!2m2!1d-63.1684124!2d-17.7846182!4e1!1m6!1m2!1s0x93f1e90052135275:0xa392a3e49075b361!2sImportadora+AUTO+DECOR+GROUP+(A22),+Av.+Roque+Aguilera,+entre+la+calle+Michel+Castro+Pinto+y,+Destacamento+450,+Santa+Cruz+de+la+Sierra!2m2!1d-63.1963933!2d-17.8071881!3m5!1s0x93f1e90052135275:0xa392a3e49075b361!8m2!3d-17.8071881!4d-63.1963933!16s%2Fg%2F11w98ldl2m?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
       </div>
 
       <div class="tienda-card">
-        <span class="tienda-badge">Sucursal A-100</span>
-        <h3>4to Anillo</h3>
-        <div class="tienda-info">
-          <div class="tienda-info-row">
-            <span class="icon">📍</span>
-            <span>4to anillo #4596, (3 cuadras al sur de la Av. Grigotá)</span>
+        <img src="img/tiendas/Sucursal A100.jpg.jpeg" alt="Sucursal A-100" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-100</span>
+          <h3>4to Anillo</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>4to anillo #4596, (3 cuadras al sur de la Av. Grigotá)</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+59133599442">3-599442</a>
+            </div>
           </div>
-          <div class="tienda-info-row">
-            <span class="icon">📞</span>
-            <a href="tel:+59133599442">3-599442</a>
-          </div>
+          <a href="https://www.google.com/maps/place/Imp.AutoDecorGroup/@-17.8146226,-63.2253809,14z/data=!4m10!1m2!2m1!1sautodecor!3m6!1s0x93f1c3180237f9c1:0x2d704aae1e9c7c8a!8m2!3d-17.8146297!4d-63.2057803!15sCglhdXRvZGVjb3JaCyIJYXV0b2RlY29ykgEQYXV0b19wYXJ0c19zdG9yZZoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyMVdkMk42YXpCUFdHeG9WWHBHVlZneFpIaFpWWFExVlZaQ2JsUlhZeEFC4AEA-gEECAAQDQ!16s%2Fg%2F11g1nx652q?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
         </div>
-        <a href="https://www.google.com/maps/place/Imp.AutoDecorGroup/@-17.8146226,-63.2253809,14z/data=!4m10!1m2!2m1!1sautodecor!3m6!1s0x93f1c3180237f9c1:0x2d704aae1e9c7c8a!8m2!3d-17.8146297!4d-63.2057803!15sCglhdXRvZGVjb3JaCyIJYXV0b2RlY29ykgEQYXV0b19wYXJ0c19zdG9yZZoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyMVdkMk42YXpCUFdHeG9WWHBHVlZneFpIaFpWWFExVlZaQ2JsUlhZeEFC4AEA-gEECAAQDQ!16s%2Fg%2F11g1nx652q?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
+      </div>
+
+      <div class="tienda-card">
+        <img src="img/tiendas/Sucursal A24.jpg.jpeg" alt="Sucursal A-24" class="tienda-card-img">
+        <div class="tienda-card-body">
+          <span class="tienda-badge">Sucursal A-24</span>
+          <h3>Doble Vía La Guardia · Entre 2do y 3er Anillo</h3>
+          <div class="tienda-info">
+            <div class="tienda-info-row">
+              <span class="icon">📍</span>
+              <span>Doble Vía La Guardia Nro. 2310, entre 2do y 3er anillo</span>
+            </div>
+            <div class="tienda-info-row">
+              <span class="icon">📞</span>
+              <a href="tel:+5913518800">3518800</a>
+            </div>
+          </div>
+          <a href="https://www.google.com/maps?q=-17.8009595,-63.1962383&z=17&hl=en" target="_blank" class="tienda-map-btn">📍 Ver en Google Maps</a>
+        </div>
       </div>
 
     </div>
@@ -2263,6 +2376,38 @@
 
       document.getElementById('formContent').style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
+    }
+
+    // Hero Background Carousel
+    const heroImages = [
+      'img/tiendas/Sucursal A0.jpg.jpeg',
+      'img/tiendas/Sucursal A1.jpg.jpeg',
+      'img/tiendas/Sucursal A2.jpg.jpeg',
+      'img/tiendas/Sucursal A3.jpg.jpeg',
+      'img/tiendas/Sucursal A4.jpg.jpeg',
+      'img/tiendas/Sucursal A7.jpg.jpeg',
+      'img/tiendas/Sucursal A8.jpg.jpeg',
+      'img/tiendas/Sucursal A9.jpg.jpeg',
+      'img/tiendas/Sucursal A11.jpg.jpeg',
+      'img/tiendas/Sucursal A12.jpg.jpeg',
+      'img/tiendas/Sucursal A16.jpg.jpeg',
+      'img/tiendas/Sucursal A18.jpg.jpeg',
+      'img/tiendas/Sucursal A21.jpg.jpeg',
+      'img/tiendas/Sucursal A22.jpg.jpeg',
+      'img/tiendas/Sucursal A24.jpg.jpeg',
+      'img/tiendas/Sucursal A100.jpg.jpeg'
+    ];
+    let currentHeroIndex = 0;
+    const heroSection = document.getElementById('hero-carousel');
+    
+    if (heroSection) {
+      // Preload images for smooth transition
+      heroImages.forEach(img => new Image().src = img);
+
+      setInterval(() => {
+        currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
+        heroSection.style.backgroundImage = `url('${heroImages[currentHeroIndex]}')`;
+      }, 5000);
     }
   </script>
 
