@@ -1,0 +1,1236 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manivelas | Autodecor</title>
+  <link rel="icon" type="image/png" href="../../img/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* Tema Claro (Por defecto) */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f9fafb;
+      --bg-card: #ffffff;
+      --border-color: #e5e7eb;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-muted: #9ca3af;
+
+      --primary: #1565c0;
+      /* Azul */
+      --primary-hover: #0d47a1;
+      --secondary: #f5c518;
+      /* Amarillo */
+      --secondary-hover: #f9d84a;
+
+      --font-title: 'Bebas Neue', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+
+      --nav-bg: rgba(255, 255, 255, 0.85);
+      --nav-border: rgba(21, 101, 192, 0.15);
+      --mobile-menu-bg: rgba(255, 255, 255, 0.98);
+    }
+
+    body.dark-mode {
+      /* Tema Oscuro */
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #141414;
+      --bg-card: #1e1e1e;
+      --border-color: #2a2a2a;
+      --text-primary: #ffffff;
+      --text-secondary: #aaaaaa;
+      --text-muted: #555555;
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 12px 30px rgba(21, 101, 192, 0.2);
+
+      --nav-bg: rgba(10, 10, 10, 0.85);
+      --nav-border: rgba(21, 101, 192, 0.25);
+      --mobile-menu-bg: rgba(10, 10, 10, 0.98);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: background var(--transition-smooth), color var(--transition-smooth);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-hover);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--nav-border);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      transition: background var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 48px;
+      width: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-logo:hover img {
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      color: var(--text-primary);
+      letter-spacing: 2px;
+      font-weight: 900;
+      transition: color var(--transition-smooth);
+    }
+
+    .nav-logo-text span {
+      color: var(--secondary);
+    }
+
+    .nav-right-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      background: rgba(21, 101, 192, 0.08);
+    }
+
+    .nav-links a.active {
+      color: #fff;
+      background: var(--primary);
+    }
+
+    .nav-links a.active:hover {
+      background: var(--primary-hover);
+      color: #fff;
+    }
+
+    /* THEME TOGGLE BUTTON */
+    .theme-toggle-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      cursor: pointer;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+      outline: none;
+    }
+
+    .theme-toggle-btn:hover {
+      background: rgba(21, 101, 192, 0.08);
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: scale(1.05);
+    }
+
+    .theme-toggle-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .sun-icon {
+      display: block;
+    }
+
+    .moon-icon {
+      display: none;
+    }
+
+    body.dark-mode .sun-icon {
+      display: none;
+    }
+
+    body.dark-mode .moon-icon {
+      display: block;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: var(--transition-smooth);
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--mobile-menu-bg);
+      backdrop-filter: blur(12px);
+      z-index: 999;
+      flex-direction: column;
+      padding: 20px;
+      border-bottom: 2px solid var(--primary);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 14px 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition-smooth);
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a.active {
+      color: var(--primary);
+      padding-left: 15px;
+      background: rgba(21, 101, 192, 0.05);
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 5%;
+      margin-top: 72px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      transition: background var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    .breadcrumb a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .breadcrumb span {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    body.dark-mode .breadcrumb span {
+      color: var(--secondary);
+    }
+
+    /* FILTROS BAR */
+    .filtros-bar {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 5%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      transition: background var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    .filtro-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .filtro-select {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 8px 14px;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      cursor: pointer;
+      outline: none;
+      transition: border-color var(--transition-smooth), background var(--transition-smooth), color var(--transition-smooth);
+    }
+
+    .filtro-select:focus {
+      border-color: var(--primary);
+    }
+
+    body.dark-mode .filtro-select:focus {
+      border-color: var(--secondary);
+    }
+
+    .filtro-select option {
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
+
+    /* PRODUCT HEADER */
+    .prod-header {
+      padding: 50px 5% 30px;
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+      transition: background var(--transition-smooth), border-color var(--transition-smooth);
+    }
+
+    .prod-header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .prod-header h1 {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 3px;
+      color: var(--text-primary);
+      line-height: 1;
+      text-transform: uppercase;
+      transition: color var(--transition-smooth);
+    }
+
+    .prod-header h1 span {
+      color: var(--primary);
+      transition: color var(--transition-smooth);
+    }
+
+    body.dark-mode .prod-header h1 span {
+      color: var(--secondary);
+    }
+
+    .prod-count {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .prod-count em {
+      color: var(--primary);
+      font-style: normal;
+      transition: color var(--transition-smooth);
+    }
+
+    body.dark-mode .prod-count em {
+      color: var(--secondary);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: var(--transition-smooth);
+    }
+
+    .back-btn:hover {
+      color: var(--primary);
+    }
+
+    body.dark-mode .back-btn:hover {
+      color: var(--secondary);
+    }
+
+    /* PRODUCTOS SECTION */
+    .productos-section {
+      padding: 60px 5% 80px;
+      background: var(--bg-secondary);
+      transition: background var(--transition-smooth);
+    }
+
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .prod-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .prod-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    body.dark-mode .prod-card:hover {
+      border-color: var(--secondary);
+    }
+
+    .prod-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      z-index: 1;
+      transition: background var(--transition-smooth);
+    }
+
+    body.dark-mode .prod-badge {
+      background: var(--primary);
+    }
+
+    .prod-badge.consultar {
+      background: #b8860b;
+      /* Dark gold */
+    }
+
+    .prod-img-wrap {
+      position: relative;
+      height: 220px;
+      background: var(--bg-secondary);
+      overflow: hidden;
+    }
+
+    .prod-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(15%);
+      transition: var(--transition-smooth);
+    }
+
+    .prod-card:hover .prod-img-wrap img {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+
+    .prod-body {
+      padding: 24px;
+    }
+
+    .prod-marca {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 8px;
+      transition: color var(--transition-smooth);
+    }
+
+    body.dark-mode .prod-marca {
+      color: var(--secondary);
+    }
+
+    .prod-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      line-height: 1.4;
+      transition: color var(--transition-smooth);
+    }
+
+    .prod-ref {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-family: monospace;
+      letter-spacing: 0.5px;
+    }
+
+    .prod-compat {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      transition: color var(--transition-smooth);
+    }
+
+    .prod-compat strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .prod-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+      transition: border-color var(--transition-smooth);
+    }
+
+    .prod-pedido {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 4px;
+      transition: var(--transition-smooth);
+    }
+
+    .prod-pedido:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    body.dark-mode .prod-pedido {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    body.dark-mode .prod-pedido:hover {
+      background: var(--primary-hover);
+    }
+
+    .prod-info-icon {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color var(--transition-smooth);
+    }
+
+    .prod-info-icon:hover {
+      color: var(--primary);
+    }
+
+    body.dark-mode .prod-info-icon:hover {
+      color: var(--secondary);
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+      grid-column: 1/-1;
+    }
+
+    .no-results a {
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 12px;
+      transition: color var(--transition-smooth);
+    }
+
+    body.dark-mode .no-results a {
+      color: var(--secondary);
+    }
+
+    /* PAGINACION */
+    .paginacion {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 40px 5%;
+      background: var(--bg-secondary);
+      transition: background var(--transition-smooth);
+    }
+
+    .pag-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+    }
+
+    .pag-btn:hover,
+    .pag-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    body.dark-mode .pag-btn.active {
+      background: var(--secondary);
+      border-color: var(--secondary);
+      color: #000;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      background: var(--primary);
+      padding: 60px 5%;
+      text-align: center;
+      transition: background var(--transition-smooth);
+    }
+
+    body.dark-mode .cta-section {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .cta-section h2 {
+      font-family: var(--font-title);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      letter-spacing: 3px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    body.dark-mode .cta-section h2 {
+      color: var(--text-primary);
+    }
+
+    .cta-section p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+      margin-bottom: 26px;
+    }
+
+    body.dark-mode .cta-section p {
+      color: var(--text-secondary);
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: #fff;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border-radius: 4px;
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-md);
+    }
+
+    .cta-btn:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    body.dark-mode .cta-btn {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    body.dark-mode .cta-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #060606;
+      border-top: 2px solid var(--primary);
+      padding: 40px 5% 25px;
+      transition: border-color var(--transition-smooth);
+    }
+
+    body.dark-mode footer {
+      border-top: 2px solid var(--secondary);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-width: 1200px;
+      margin: 0 auto;
+      color: #777;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8rem;
+    }
+
+    .footer-bottom span {
+      color: var(--primary);
+      transition: color var(--transition-smooth);
+    }
+
+    body.dark-mode .footer-bottom span {
+      color: var(--secondary);
+    }
+
+    @media(max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .prod-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .filtros-bar {
+        gap: 10px;
+      }
+    }
+
+    @media(max-width: 500px) {
+      .prod-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  
+    .prod-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #25D366;
+      color: #fff !important;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 15px;
+      border-radius: 4px;
+      transition: var(--transition-smooth);
+    }
+    .prod-whatsapp:hover {
+      background: #20ba5a;
+      transform: translateY(-2px);
+    }
+    body.dark-mode .prod-whatsapp {
+      background: #25D366;
+      color: #fff !important;
+    }
+    body.dark-mode .prod-whatsapp:hover {
+      background: #20ba5a;
+    }
+
+    /* FLOATING BUTTONS */
+    .floating-buttons {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 9999;
+    }
+    .float-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #ffffff;
+    }
+    .float-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+    }
+    .float-whatsapp {
+      background-color: #25D366;
+      animation: float-pulse 2s infinite;
+    }
+    .float-whatsapp:hover {
+      background-color: #20ba5a;
+      transform: scale(1.1) translateY(-2px);
+      box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
+    }
+    .float-facebook {
+      background-color: #1877F2;
+    }
+    .float-facebook:hover {
+      background-color: #166fe5;
+      transform: scale(1.1) translateY(-2px);
+      box-shadow: 0 6px 15px rgba(24, 119, 242, 0.5);
+    }
+    @keyframes float-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+      70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+    @media(max-width: 768px) {
+      .floating-buttons {
+        bottom: 16px;
+        right: 16px;
+        gap: 12px;
+      }
+      .float-btn {
+        width: 48px;
+        height: 48px;
+      }
+      .float-btn svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="../../index.html" class="nav-logo">
+      <img src="../../img/logo.png" alt="Autodecor">
+      <div class="nav-logo-text">AUTO<span>DECOR</span></div>
+    </a>
+    <div class="nav-right-container">
+      <ul class="nav-links">
+        <li><a href="../../index.html">Inicio</a></li>
+        <li><a href="../../nosotros.html">Nosotros</a></li>
+        <li><a href="../../productos.html" class="active">Productos</a></li>
+        <li><a href="../../tiendas.html">Tiendas</a></li>
+      </ul>
+
+      <!-- THEME TOGGLE BUTTON -->
+      <button class="theme-toggle-btn" id="theme-toggle" title="Cambiar tema">
+        <svg class="sun-icon" viewBox="0 0 24 24">
+          <path
+            d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0s-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z" />
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24">
+          <path
+            d="M12.3 22c5.07 0 9.2-3.8 9.7-8.7-4.1 2.3-9.3.9-11.4-3.1C8.5 6.2 9.9 1 14 0c-5.7.3-10 5-10 10.7C4 16.9 9 22 12.3 22z" />
+        </svg>
+      </button>
+
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../../index.html">Inicio</a>
+    <a href="../../nosotros.html">Nosotros</a>
+    <a href="../../productos.html">Productos</a>
+    <a href="../../tiendas.html">Tiendas</a>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="../../index.html">Inicio</a> › <a href="../../productos.html">Productos</a> › <a
+      href="cat-accesorios.html">Accesorios</a> › <span>Manivelas</span>
+  </div>
+
+  <div class="filtros-bar">
+    <span class="filtro-label">Filtrar por:</span>
+    <select class="filtro-select" id="filtroMarca">
+      <option value="">Todas las marcas</option>
+      <option>Toyota</option>
+      <option>Nissan</option>
+      <option>Mitsubishi</option>
+      <option>Suzuki</option>
+      <option>Kia</option>
+      <option>Hyundai</option>
+      <option>Chevrolet</option>
+      <option>Isuzu</option>
+      <option>Mazda</option>
+      <option>Ford</option>
+      <option>Hino</option>
+    </select>
+    <select class="filtro-select" id="filtroModelo">
+      <option value="">Todos los modelos</option>
+      <option>Hilux</option>
+      <option>Land Cruiser</option>
+      <option>Fortuner</option>
+      <option>Frontier</option>
+      <option>Navara</option>
+      <option>L200</option>
+      <option>Sportage</option>
+      <option>Tucson</option>
+      <option>D-Max</option>
+      <option>Jimny</option>
+      <option>Grand Vitara</option>
+      <option>BT-50</option>
+      <option>Ranger</option>
+    </select>
+    <select class="filtro-select" id="filtroAnio">
+      <option value="">Todos los años</option>
+      <option value="2020-2026">2020–2026</option>
+      <option value="2015-2019">2015–2019</option>
+      <option value="2010-2014">2010–2014</option>
+      <option value="2005-2009">2005–2009</option>
+    </select>
+  </div>
+
+  <div class="prod-header">
+    <div class="prod-header-inner">
+      <div>
+        <h1><span>Manivelas</span></h1>
+        <div class="prod-count">Mostrando <em id="contador">8</em> productos</div>
+      </div>
+      <a href="cat-accesorios.html" class="back-btn">← Volver a Accesorios</a>
+    </div>
+  </div>
+
+  <section class="productos-section">
+    <div class="prod-grid" id="prodGrid">
+      <div class="prod-card" data-marca="toyota" data-modelos="hilux"
+        data-anios="2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015">
+        <span class="prod-badge ">Stock</span>
+        <div class="prod-img-wrap"><img src="../../img/productos/accesorios/manivelas.png"
+            alt="Manivela Hilux Delantera"></div>
+        <div class="prod-body">
+          <div class="prod-marca">Toyota</div>
+          <div class="prod-name">Manivela Hilux Delantera</div>
+          <div class="prod-ref">Ref: MAN-TOY-HL-001</div>
+          <div class="prod-compat"><strong>Compatible:</strong> Hilux 2005–2015 · Delantera</div>
+          <div class="prod-footer" style="gap: 8px; justify-content: flex-start;"><a href="../../tiendas.html#pedido" class="prod-pedido">🛒 Pedir</a><a href="https://wa.me/59175364818?text=Hola,%20quisiera%20consultar%20sobre%20el%20producto:%20Manivela%20Hilux%20Delantera" target="_blank" class="prod-whatsapp">💬 WhatsApp</a></div>
+        </div>
+      </div>
+      <div class="prod-card" data-marca="nissan" data-modelos="frontier"
+        data-anios="2008 2009 2010 2011 2012 2013 2014 2015 2016">
+        <span class="prod-badge ">Stock</span>
+        <div class="prod-img-wrap"><img src="../../img/productos/accesorios/manivelas.png"
+            alt="Manivela Frontier"></div>
+        <div class="prod-body">
+          <div class="prod-marca">Nissan</div>
+          <div class="prod-name">Manivela Frontier</div>
+          <div class="prod-ref">Ref: MAN-NIS-FR-001</div>
+          <div class="prod-compat"><strong>Compatible:</strong> Frontier 2008–2016</div>
+          <div class="prod-footer" style="gap: 8px; justify-content: flex-start;"><a href="../../tiendas.html#pedido" class="prod-pedido">🛒 Pedir</a><a href="https://wa.me/59175364818?text=Hola,%20quisiera%20consultar%20sobre%20el%20producto:%20Manivela%20Frontier" target="_blank" class="prod-whatsapp">💬 WhatsApp</a></div>
+        </div>
+      </div>
+      <div class="prod-card" data-marca="mitsubishi" data-modelos="l200"
+        data-anios="2006 2007 2008 2009 2010 2011 2012 2013 2014">
+        <span class="prod-badge ">Stock</span>
+        <div class="prod-img-wrap"><img src="../../img/productos/accesorios/manivelas.png"
+            alt="Manivela L200"></div>
+        <div class="prod-body">
+          <div class="prod-marca">Mitsubishi</div>
+          <div class="prod-name">Manivela L200</div>
+          <div class="prod-ref">Ref: MAN-MIT-L2-001</div>
+          <div class="prod-compat"><strong>Compatible:</strong> L200 2006–2014</div>
+          <div class="prod-footer" style="gap: 8px; justify-content: flex-start;"><a href="../../tiendas.html#pedido" class="prod-pedido">🛒 Pedir</a><a href="https://wa.me/59175364818?text=Hola,%20quisiera%20consultar%20sobre%20el%20producto:%20Manivela%20L200" target="_blank" class="prod-whatsapp">💬 WhatsApp</a></div>
+        </div>
+      </div>
+      <div class="prod-card" data-marca="suzuki" data-modelos="grand vitara"
+        data-anios="2006 2007 2008 2009 2010 2011 2012 2013 2014 2015">
+        <span class="prod-badge consultar">Consultar</span>
+        <div class="prod-img-wrap"><img src="../../img/productos/accesorios/manivelas.png"
+            alt="Manivela Grand Vitara"></div>
+        <div class="prod-body">
+          <div class="prod-marca">Suzuki</div>
+          <div class="prod-name">Manivela Grand Vitara</div>
+          <div class="prod-ref">Ref: MAN-SUZ-GV-001</div>
+          <div class="prod-compat"><strong>Compatible:</strong> Grand Vitara 2006–2015</div>
+          <div class="prod-footer" style="gap: 8px; justify-content: flex-start;"><a href="../../tiendas.html#pedido" class="prod-pedido">🛒 Pedir</a><a href="https://wa.me/59175364818?text=Hola,%20quisiera%20consultar%20sobre%20el%20producto:%20Manivela%20Grand%20Vitara" target="_blank" class="prod-whatsapp">💬 WhatsApp</a></div>
+        </div>
+      </div>
+      <div class="prod-card" data-marca="hyundai" data-modelos="tucson"
+        data-anios="2010 2011 2012 2013 2014 2015 2016 2017 2018">
+        <span class="prod-badge ">Stock</span>
+        <div class="prod-img-wrap"><img src="../../img/productos/accesorios/manivelas.png"
+            alt="Manivela Tucson"></div>
+        <div class="prod-body">
+          <div class="prod-marca">Hyundai</div>
+          <div class="prod-name">Manivela Tucson</div>
+          <div class="prod-ref">Ref: MAN-HYU-TC-001</div>
+          <div class="prod-compat"><strong>Compatible:</strong> Tucson 2010–2018</div>
+          <div class="prod-footer" style="gap: 8px; justify-content: flex-start;"><a href="../../tiendas.html#pedido" class="prod-pedido">🛒 Pedir</a><a href="https://wa.me/59175364818?text=Hola,%20quisiera%20consultar%20sobre%20el%20producto:%20Manivela%20Tucson" target="_blank" class="prod-whatsapp">💬 WhatsApp</a></div>
+        </div>
+      </div>
+      <div class="prod-card" data-marca="kia" data-modelos="sportage" data-anios="2010 2011 2012 2013 2014 2015 2016">
+        <span class="prod-badge ">Stock</span>
+        <div class="prod-img-wrap"><img src="../../img/productos/accesorios/manivelas.png"
+            alt="Manivela Sportage"></div>
+        <div class="prod-body">
+          <div class="prod-marca">Kia</div>
+          <div class="prod-name">Manivela Sportage</div>
+          <div class="prod-ref">Ref: MAN-KIA-SP-001</div>
+          <div class="prod-compat"><strong>Compatible:</strong> Sportage 2010–2016</div>
+          <div class="prod-footer" style="gap: 8px; justify-content: flex-start;"><a href="../../tiendas.html#pedido" class="prod-pedido">🛒 Pedir</a><a href="https://wa.me/59175364818?text=Hola,%20quisiera%20consultar%20sobre%20el%20producto:%20Manivela%20Sportage" target="_blank" class="prod-whatsapp">💬 WhatsApp</a></div>
+        </div>
+      </div>
+      <div class="prod-card" data-marca="chevrolet" data-modelos="d-max"
+        data-anios="2010 2011 2012 2013 2014 2015 2016 2017">
+        <span class="prod-badge ">Stock</span>
+        <div class="prod-img-wrap"><img src="../../img/productos/accesorios/manivelas.png"
+            alt="Manivela D-Max"></div>
+        <div class="prod-body">
+          <div class="prod-marca">Chevrolet</div>
+          <div class="prod-name">Manivela D-Max</div>
+          <div class="prod-ref">Ref: MAN-CHE-DM-001</div>
+          <div class="prod-compat"><strong>Compatible:</strong> D-Max 2010–2017</div>
+          <div class="prod-footer" style="gap: 8px; justify-content: flex-start;"><a href="../../tiendas.html#pedido" class="prod-pedido">🛒 Pedir</a><a href="https://wa.me/59175364818?text=Hola,%20quisiera%20consultar%20sobre%20el%20producto:%20Manivela%20D-Max" target="_blank" class="prod-whatsapp">💬 WhatsApp</a></div>
+        </div>
+      </div>
+      <div class="prod-card" data-marca="isuzu" data-modelos="d-max"
+        data-anios="2010 2011 2012 2013 2014 2015 2016 2017 2018">
+        <span class="prod-badge consultar">Consultar</span>
+        <div class="prod-img-wrap"><img src="../../img/productos/accesorios/manivelas.png"
+            alt="Manivela D-Max Isuzu"></div>
+        <div class="prod-body">
+          <div class="prod-marca">Isuzu</div>
+          <div class="prod-name">Manivela D-Max Isuzu</div>
+          <div class="prod-ref">Ref: MAN-ISU-DM-001</div>
+          <div class="prod-compat"><strong>Compatible:</strong> D-Max Isuzu 2010–2018</div>
+          <div class="prod-footer" style="gap: 8px; justify-content: flex-start;"><a href="../../tiendas.html#pedido" class="prod-pedido">🛒 Pedir</a><a href="https://wa.me/59175364818?text=Hola,%20quisiera%20consultar%20sobre%20el%20producto:%20Manivela%20D-Max%20Isuzu" target="_blank" class="prod-whatsapp">💬 WhatsApp</a></div>
+        </div>
+      </div>
+      <div class="no-results" id="noResults">
+        ⚠️ No se encontraron productos con ese filtro.<br>
+        <a href="../../tiendas.html#pedido">→ Hacer un pedido personalizado</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="paginacion"><a class="pag-btn active">1</a><a class="pag-btn">2</a><a class="pag-btn">›</a></div>
+
+  <section class="cta-section">
+    <h2>¿NO ENCONTRASTE LO QUE BUSCAS?</h2>
+    <p>Tenemos miles de referencias. Envíanos los datos de tu vehículo y lo conseguimos.</p>
+    <a href="../../tiendas.html#pedido" class="cta-btn">Hacer un pedido →</a>
+  </section>
+
+  <footer>
+    <div class="footer-bottom">
+      <p>© 2025 <span>Importadora Autodecor Group</span> — Todos los derechos reservados.</p>
+      <p>Fundada en <span>1988</span> · Santa Cruz, Bolivia</p>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Theme Toggle Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Filtros de Productos
+    const filtroMarca = document.getElementById('filtroMarca');
+    const filtroModelo = document.getElementById('filtroModelo');
+    const filtroAnio = document.getElementById('filtroAnio');
+    const cards = document.querySelectorAll('.prod-card');
+    const contador = document.getElementById('contador');
+    const noResults = document.getElementById('noResults');
+
+    function filtrar() {
+      const marca = filtroMarca.value.toLowerCase().trim();
+      const modelo = filtroModelo.value.toLowerCase().trim();
+      const anio = filtroAnio.value;
+
+      let visible = 0;
+
+      cards.forEach(card => {
+        const cMarca = (card.dataset.marca || '').toLowerCase();
+        const cModelos = (card.dataset.modelos || '').toLowerCase();
+        const cAnios = (card.dataset.anios || '').split(' ').map(Number);
+
+        let ok = true;
+
+        if (marca && !cMarca.includes(marca)) ok = false;
+        if (modelo && !cModelos.includes(modelo)) ok = false;
+        if (anio) {
+          const [desde, hasta] = anio.split('-').map(Number);
+          const coincideAnio = cAnios.some(a => a >= desde && a <= hasta);
+          if (!coincideAnio) ok = false;
+        }
+
+        card.style.display = ok ? '' : 'none';
+        if (ok) visible++;
+      });
+
+      contador.textContent = visible;
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    filtroMarca.addEventListener('change', filtrar);
+    filtroModelo.addEventListener('change', filtrar);
+    filtroAnio.addEventListener('change', filtrar);
+  </script>
+
+  <!-- FLOATING CONTACT BUTTONS -->
+  <div class="floating-buttons">
+    <a href="https://wa.me/59175364818" target="_blank" class="float-btn float-whatsapp" title="Escr�benos por WhatsApp">
+      <svg viewBox="0 0 24 24">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.057 5.284 5.349 0 11.859 0c3.151.001 6.115 1.23 8.344 3.461 2.23 2.231 3.458 5.195 3.457 8.348-.003 6.557-5.297 11.84-11.807 11.84-2.001-.001-3.968-.51-5.717-1.488L0 24zm6.59-4.846c1.6.95 3.197 1.451 4.793 1.452 5.568 0 10.1-4.526 10.103-10.096.002-2.699-1.047-5.236-2.951-7.14C16.63 1.464 14.09 .417 11.858.417a10.1 10.1 0 0 0-10.097 10.1c-.001 1.761.472 3.483 1.369 5.021l-.974 3.561 3.65-.958zm12.03-5.269c-.327-.164-1.938-.956-2.237-1.064-.299-.11-.517-.164-.734.164-.217.327-.844 1.064-1.034 1.282-.19.218-.38.245-.707.081-.327-.164-1.381-.508-2.63-1.622-.972-.867-1.628-1.938-1.819-2.264-.19-.327-.02-.504.144-.666.147-.146.327-.382.49-.573.163-.19.217-.327.326-.545.11-.218.054-.409-.027-.573-.082-.164-.734-1.769-1.007-2.422-.265-.636-.53-.55-.734-.56-.19-.01-.408-.012-.625-.012-.218 0-.573.082-.872.409-.299.327-1.143 1.117-1.143 2.724 0 1.608 1.171 3.159 1.334 3.377.163.218 2.302 3.515 5.576 4.925.779.336 1.387.537 1.862.688.783.248 1.496.213 2.059.129.628-.094 1.938-.792 2.21-1.556.272-.764.272-1.418.19-1.556-.081-.136-.298-.218-.626-.382z"/>
+      </svg>
+    </a>
+    <a href="https://www.facebook.com/importadora.autodecor.group/?locale=es_LA" target="_blank" class="float-btn float-facebook" title="S�guenos en Facebook">
+      <svg viewBox="0 0 24 24">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    </a>
+  </div>
+
+</body>
+
+</html>

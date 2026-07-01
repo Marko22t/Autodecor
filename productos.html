@@ -829,6 +829,51 @@
       }
     }
   
+    /* SEARCH BAR */
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      display: flex;
+      gap: 10px;
+      padding: 0 5%;
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: 14px 20px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: var(--font-body);
+      transition: var(--transition-smooth);
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(21, 101, 192, 0.1);
+    }
+    
+    .search-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0 24px;
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    
+    .search-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
     /* FLOATING BUTTONS */
     .floating-buttons {
       position: fixed;
@@ -944,7 +989,15 @@
       <h2 class="section-title">CATEGORÍAS <span>DE PRODUCTOS</span></h2>
       <div class="section-line"></div>
     </div>
+    
+    <div class="search-container">
+      <input type="search" id="product-search" class="search-input" placeholder="Buscar repuesto (ej. Anillos, Amortiguadores...)" list="product-list">
+      <datalist id="product-list"></datalist>
+      <button id="search-btn" class="search-btn">Buscar</button>
+    </div>
+
     <div class="cat-grid">
+      <!--
       <a href="Categorias/Categoria_Motor/cat-motor.html" class="cat-card">
         <img src="img/cat-motor.png" alt="Motor y Transmisión">
         <div class="cat-overlay">
@@ -978,6 +1031,108 @@
           <div class="cat-tag">Categoría</div>
           <div class="cat-title">ELÉCTRICO</div>
           <div class="cat-desc">Alternadores, arrancadores, fusibles, sensores, bujías y sistema eléctrico.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      -->
+
+      <!-- 11 Nuevas Tarjetas -->
+      <a href="Categorias/Categoria_Motor/cat-motor.html" class="cat-card">
+        <img src="img/productos/Motor/MOTOR-9-OK-A.jpg" alt="Motor">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">MOTOR</div>
+          <div class="cat-desc">Anillos, cojinetes, pistones, camisas, válvulas, retenes y más.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      <a href="Categorias/Categoria_Suspension/cat-suspension.html" class="cat-card">
+        <img src="img/productos/Suspension/SUSPENSION-7-OK-A.webp" alt="Suspensión">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">SUSPENSIÓN</div>
+          <div class="cat-desc">Amortiguadores, bujes, rótulas, terminales, crucetas y más.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      <a href="Categorias/Categoria_Direccion/cat-direccion.html" class="cat-card">
+        <img src="img/productos/Direccion-Transmision/DIRECCION TRASMISION -5-OK-A.jpg" alt="Dirección / Transmisión">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">DIRECCIÓN/TRANSMISIÓN</div>
+          <div class="cat-desc">Guardapolvos, juntas homocinéticas, tricetas, yoques y acoples.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      <a href="Categorias/Categoria_Rodamientos/cat-rodamientos.html" class="cat-card">
+        <img src="img/productos/Rodamientos/ROMIENTOS-1-OK-A.jpg" alt="Rodamientos">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">RODAMIENTOS</div>
+          <div class="cat-desc">Rodamientos de alternador, rueda, caja, cardan, palier y más.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      <a href="Categorias/Categoria_Soportes/cat-soportes.html" class="cat-card">
+        <img src="img/productos/Soportes/SOPORTES-3-OK-A.jpg" alt="Soportes">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">SOPORTES</div>
+          <div class="cat-desc">Soportes de motor, caja, cardan, amortiguador, silenciador y más.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      <a href="Categorias/Categoria_Bombas/cat-bombas.html" class="cat-card">
+        <img src="img/productos/Suspension/Bombas/BOMBAS-9-OK-A.png" alt="Bombas">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">BOMBAS</div>
+          <div class="cat-desc">Bombas de agua, aceite, freno, embrague, gasolina y auxiliar.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      <a href="Categorias/Categoria_Discos/cat-discos.html" class="cat-card">
+        <img src="img/productos/Discos-Prensa/DISCO PRENSA FRENOS-3-A.jpg" alt="Discos / Prensas">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">DISCOS/PRENSAS</div>
+          <div class="cat-desc">Discos y prensas de embrague para todo tipo de vehículo.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      <a href="Categorias/Categoria_Correas/cat-correas.html" class="cat-card">
+        <img src="img/productos/Correas-Aspas/CORREAS-ASPAS 7-OK-A.jpg" alt="Correas / Aspas">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">CORREAS/ASPAS</div>
+          <div class="cat-desc">Correas y aspas de ventilador y radiador.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      <a href="Categorias/Categoria_Frenos/cat-frenos.html" class="cat-card">
+        <img src="img/productos/Frenos/DISCO PRENSA FRENOS-4-A.jpg" alt="Frenos">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">FRENOS</div>
+          <div class="cat-desc">Pastillas, balatas, cilindros, cubetas, reguladores y reparos.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      <a href="Categorias/Categoria_Cables/cat-cables.html" class="cat-card">
+        <img src="img/productos/Cables/CABLES-5-OK-A.jpg" alt="Cables">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">CABLES</div>
+          <div class="cat-desc">Cables de acelerador, bujía, embrague y velocímetro.</div>
+          <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
+        </div>
+      </a>
+      <a href="Categorias/Categoria_Electrico/cat-electrico.html" class="cat-card">
+        <img src="img/productos/Sistema_Electrico/SISTEMA ELECTRICO-6-OK-AAA.jpg" alt="Sistema Eléctrico">
+        <div class="cat-overlay">
+          <div class="cat-tag">Categoría</div>
+          <div class="cat-title">SISTEMA ELÉCTRICO</div>
+          <div class="cat-desc">Bujías, carburador, motor de arranque, bendix y más.</div>
           <div class="cat-btn">Ver productos <span class="cat-arrow">→</span></div>
         </div>
       </a>
@@ -1102,6 +1257,118 @@
       const isDark = document.body.classList.contains('dark-mode');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
+
+    // Search Logic
+    const categoryMapping = {
+      "ANILLOS": "Categorias/Categoria_Motor/cat-motor.html",
+      "AXIALES BANCADA": "Categorias/Categoria_Motor/cat-motor.html",
+      "COJINETES BIELA": "Categorias/Categoria_Motor/cat-motor.html",
+      "COJINETES BANCADA": "Categorias/Categoria_Motor/cat-motor.html",
+      "EJE LEVA-CIGÜEÑAL": "Categorias/Categoria_Motor/cat-motor.html",
+      "CAMISAS": "Categorias/Categoria_Motor/cat-motor.html",
+      "CORREA DISTRIBUCION-BBA INYECT.": "Categorias/Categoria_Motor/cat-motor.html",
+      "GUIAS DE VALVULA": "Categorias/Categoria_Motor/cat-motor.html",
+      "PISTON-KIT": "Categorias/Categoria_Motor/cat-motor.html",
+      "RETENES-PRECAMARA": "Categorias/Categoria_Motor/cat-motor.html",
+      "VALVULAS-TEJOS-CULATAS": "Categorias/Categoria_Motor/cat-motor.html",
+      
+      "AMORTIGUADORES": "Categorias/Categoria_Suspension/cat-suspension.html",
+      "BUJE BIELA": "Categorias/Categoria_Suspension/cat-suspension.html",
+      "BUJE BANDEJA": "Categorias/Categoria_Suspension/cat-suspension.html",
+      "BUJE BRAZO FIJO-PITMAN": "Categorias/Categoria_Suspension/cat-suspension.html",
+      "BUJE ESTABILIZADOR": "Categorias/Categoria_Suspension/cat-suspension.html",
+      "BUJE TENSOR": "Categorias/Categoria_Suspension/cat-suspension.html",
+      "BRAZO FIJO-PITMAN": "Categorias/Categoria_Suspension/cat-suspension.html",
+      "CRUCETA DIRECCION": "Categorias/Categoria_Suspension/cat-suspension.html",
+      "ROTULAS": "Categorias/Categoria_Suspension/cat-suspension.html",
+      "TERMINALES": "Categorias/Categoria_Suspension/cat-suspension.html",
+      
+      "GUARDAPOLVOS JUNTAS-CREMALLERAS": "Categorias/Categoria_Direccion/cat-direccion.html",
+      "JUNTAS HOMOCINETICAS-TRICETAS": "Categorias/Categoria_Direccion/cat-direccion.html",
+      "YOQUE-ACOPLE-ESPIGA": "Categorias/Categoria_Direccion/cat-direccion.html",
+      
+      "ALTERNADOR": "Categorias/Categoria_Rodamientos/cat-rodamientos.html",
+      "BBA AGUA": "Categorias/Categoria_Rodamientos/cat-rodamientos.html",
+      "CAJA-CARDAN-CORONA": "Categorias/Categoria_Rodamientos/cat-rodamientos.html",
+      "DESPLAZADOR-DIRECCION": "Categorias/Categoria_Rodamientos/cat-rodamientos.html",
+      "GUIADOR": "Categorias/Categoria_Rodamientos/cat-rodamientos.html",
+      "PALIER-RUEDA-PUERTA-PIÑON": "Categorias/Categoria_Rodamientos/cat-rodamientos.html",
+      "TENSOR": "Categorias/Categoria_Rodamientos/cat-rodamientos.html",
+      
+      "AMORTIGUADOR": "Categorias/Categoria_Soportes/cat-soportes.html",
+      "CAJA": "Categorias/Categoria_Soportes/cat-soportes.html",
+      "CARDAN": "Categorias/Categoria_Soportes/cat-soportes.html",
+      "MOTOR": "Categorias/Categoria_Soportes/cat-soportes.html",
+      "ROSTER": "Categorias/Categoria_Soportes/cat-soportes.html",
+      "SILENCIADOR": "Categorias/Categoria_Soportes/cat-soportes.html",
+      
+      "BOMBA AUXILIAR": "Categorias/Categoria_Bombas/cat-bombas.html",
+      "BOMBA ACEITE": "Categorias/Categoria_Bombas/cat-bombas.html",
+      "BOMBA AGUA": "Categorias/Categoria_Bombas/cat-bombas.html",
+      "BOMBA EMBRAGUE": "Categorias/Categoria_Bombas/cat-bombas.html",
+      "BOMBA FRENO": "Categorias/Categoria_Bombas/cat-bombas.html",
+      "BOMBA GASOLINA": "Categorias/Categoria_Bombas/cat-bombas.html",
+      
+      "DISCO EMBRAGUE": "Categorias/Categoria_Discos/cat-discos.html",
+      "PRENSA EMBRAGUE": "Categorias/Categoria_Discos/cat-discos.html",
+      
+      "CORREA-ASPA VENTILADOR-RADIADOR": "Categorias/Categoria_Correas/cat-correas.html",
+      
+      "CUBETAS": "Categorias/Categoria_Frenos/cat-frenos.html",
+      "CILINDRO-REGULADOR FRENO": "Categorias/Categoria_Frenos/cat-frenos.html",
+      "PASTILLAS-BALATAS": "Categorias/Categoria_Frenos/cat-frenos.html",
+      "REPAROS": "Categorias/Categoria_Frenos/cat-frenos.html",
+      
+      "ACELERADOR": "Categorias/Categoria_Cables/cat-cables.html",
+      "BUJIA": "Categorias/Categoria_Cables/cat-cables.html",
+      "EMBRAGUE": "Categorias/Categoria_Cables/cat-cables.html",
+      "VELOCIMETRO": "Categorias/Categoria_Cables/cat-cables.html",
+      
+      "BUJIAS PRECALENTADOR": "Categorias/Categoria_Electrico/cat-electrico.html",
+      "BUJIAS ENCENDIDO": "Categorias/Categoria_Electrico/cat-electrico.html",
+      "CARBURADOR": "Categorias/Categoria_Electrico/cat-electrico.html",
+      "MOTOR ARRANQUE-BENDIX-AUTOM": "Categorias/Categoria_Electrico/cat-electrico.html"
+    };
+
+    const dataList = document.getElementById('product-list');
+    const searchInput = document.getElementById('product-search');
+    const searchBtn = document.getElementById('search-btn');
+
+    if (dataList && searchInput && searchBtn) {
+      // Populate datalist
+      Object.keys(categoryMapping).forEach(product => {
+        const option = document.createElement('option');
+        option.value = product;
+        dataList.appendChild(option);
+      });
+
+      function performSearch() {
+        const query = searchInput.value.trim().toUpperCase();
+        if (!query) return;
+
+        // Find direct match
+        if (categoryMapping[query]) {
+          window.location.href = categoryMapping[query];
+          return;
+        }
+
+        // Find partial match
+        const keys = Object.keys(categoryMapping);
+        const match = keys.find(k => k.includes(query) || query.includes(k));
+        if (match) {
+          window.location.href = categoryMapping[match];
+        } else {
+          alert("Producto no encontrado. Revisa las categorías abajo o contáctanos.");
+        }
+      }
+
+      searchBtn.addEventListener('click', performSearch);
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          performSearch();
+        }
+      });
+    }
   </script>
 
   <!-- FLOATING CONTACT BUTTONS -->
