@@ -702,10 +702,33 @@
     }
 
     .why-icon {
-      font-size: 2.2rem;
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: rgba(21, 101, 192, 0.08);
+      border: 1.5px solid rgba(21, 101, 192, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 24px;
-      display: inline-block;
+      transition: var(--transition-smooth);
     }
+    .why-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--primary);
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke var(--transition-smooth);
+    }
+    .why-card:hover .why-icon { background: var(--primary); border-color: var(--primary); }
+    .why-card:hover .why-icon svg { stroke: #fff; }
+    body.dark-mode .why-icon { background: rgba(245, 197, 24, 0.08); border-color: rgba(245, 197, 24, 0.2); }
+    body.dark-mode .why-icon svg { stroke: var(--secondary); }
+    body.dark-mode .why-card:hover .why-icon { background: var(--secondary); border-color: var(--secondary); }
+    body.dark-mode .why-card:hover .why-icon svg { stroke: #111; }
 
     .why-card h3 {
       font-size: 1.05rem;
@@ -1253,25 +1276,25 @@
     <div class="why-grid">
       <div class="why-card">
         <div class="why-num">01</div>
-        <div class="why-icon">🏆</div>
+        <div class="why-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
         <h3>35+ Años de Experiencia</h3>
         <p>Desde 1988 somos referentes en repuestos automotrices en Bolivia, con décadas de confianza ganada.</p>
       </div>
       <div class="why-card">
         <div class="why-num">02</div>
-        <div class="why-icon">🚚</div>
+        <div class="why-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></div>
         <h3>Despacho a Todo Bolivia</h3>
         <p>Enviamos tu pedido a cualquier ciudad o provincia del país. Cotiza y recibe sin salir de casa.</p>
       </div>
       <div class="why-card">
         <div class="why-num">03</div>
-        <div class="why-icon">✅</div>
+        <div class="why-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 13c0 5-3.5 7.5-7.35 8.95a1 1 0 0 1-.6-.01C8.5 20.5 5 18 5 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C15.51 3.81 18 5 20 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div>
         <h3>Repuestos de Calidad</h3>
         <p>Trabajamos con repuestos de calidad garantizada para las marcas más importantes del mercado automotriz.</p>
       </div>
       <div class="why-card">
         <div class="why-num">04</div>
-        <div class="why-icon">💬</div>
+        <div class="why-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div>
         <h3>Asesoría Especializada</h3>
         <p>Nuestro equipo te ayuda a encontrar el repuesto exacto que tu vehículo necesita, sin complicaciones.</p>
       </div>
