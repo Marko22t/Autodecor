@@ -697,11 +697,16 @@
       box-shadow: var(--shadow-lg);
     }
 
-    .vm-icon {
-      font-size: 2.8rem;
-      margin-bottom: 24px;
-      display: block;
+    .vm-card-bar {
+      width: 48px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--primary);
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 2;
     }
+    body.dark-mode .vm-card-bar { background: var(--secondary); }
 
     .vm-card h3 {
       font-family: var(--font-title);
@@ -805,8 +810,37 @@
     }
 
     .servicio-icon {
-      font-size: 2.4rem;
-      margin-bottom: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 20px rgba(21, 101, 192, 0.28);
+      transition: var(--transition-smooth);
+    }
+    .servicio-icon svg {
+      width: 26px;
+      height: 26px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .servicio-card:hover .servicio-icon {
+      transform: scale(1.08);
+      box-shadow: 0 10px 26px rgba(21, 101, 192, 0.4);
+    }
+    body.dark-mode .servicio-icon {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-hover) 100%);
+      box-shadow: 0 8px 20px rgba(245, 197, 24, 0.2);
+    }
+    body.dark-mode .servicio-icon svg { stroke: #111; }
+    body.dark-mode .servicio-card:hover .servicio-icon {
+      box-shadow: 0 10px 26px rgba(245, 197, 24, 0.32);
     }
 
     .servicio-card h3 {
@@ -1232,7 +1266,7 @@
     <div class="vm-grid">
       <div class="vm-card vision">
         <div class="vm-card-deco">V</div>
-        <span class="vm-icon">🔭</span>
+        <div class="vm-card-bar"></div>
         <h3>NUESTRA <span>VISIÓN</span></h3>
         <p>Ser la empresa importadora de repuestos automotrices líder en Bolivia, reconocida por la calidad de nuestros
           productos, la amplitud de nuestro catálogo y la excelencia en el servicio al cliente. Queremos estar presentes
@@ -1241,7 +1275,7 @@
       </div>
       <div class="vm-card mision">
         <div class="vm-card-deco">M</div>
-        <span class="vm-icon">🎯</span>
+        <div class="vm-card-bar"></div>
         <h3>NUESTRA <span>MISIÓN</span></h3>
         <p>Proveer a nuestros clientes repuestos y accesorios automotrices de calidad garantizada, con atención
           personalizada, precios justos y entrega oportuna. Trabajamos cada día para simplificar el proceso de encontrar
@@ -1260,34 +1294,34 @@
     </div>
     <div class="servicios-grid">
       <div class="servicio-card">
-        <div class="servicio-icon">💻</div>
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
         <h3>Cotización por Internet</h3>
         <p>Solicita el repuesto que necesitas desde cualquier parte de Bolivia y recibe tu cotización rápidamente.</p>
       </div>
       <div class="servicio-card">
-        <div class="servicio-icon">🚚</div>
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></div>
         <h3>Envío a Domicilio</h3>
         <p>Despachamos a todo el territorio boliviano. Tu repuesto llega directamente a la puerta de tu negocio o casa.
         </p>
       </div>
       <div class="servicio-card">
-        <div class="servicio-icon">👨‍🔧</div>
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94Z"/></svg></div>
         <h3>Asesoría Personalizada</h3>
         <p>Nuestros expertos te guían para encontrar el repuesto exacto que tu vehículo necesita, sin errores.</p>
       </div>
       <div class="servicio-card">
-        <div class="servicio-icon">📋</div>
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></div>
         <h3>Catálogo Online</h3>
         <p>Consulta nuestra amplia variedad de productos organizados por marca, modelo y categoría.</p>
       </div>
       <div class="servicio-card">
-        <div class="servicio-icon">📦</div>
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/></svg></div>
         <h3>Venta al Por Mayor</h3>
         <p>Precios especiales para mecánicas, talleres y distribuidores. Contáctanos para una cotización personalizada.
         </p>
       </div>
       <div class="servicio-card">
-        <div class="servicio-icon">⏰</div>
+        <div class="servicio-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <h3>Atención Oportuna</h3>
         <p>Respondemos rápido a cada consulta. Tu tiempo es valioso y lo sabemos.</p>
       </div>

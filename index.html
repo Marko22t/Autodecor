@@ -1057,12 +1057,29 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .hero-stats {
-        display: none;
+      .hero-content {
+        padding-bottom: 24px;
       }
 
-      .hero-content {
-        padding-bottom: 120px;
+      #hero {
+        min-height: unset;
+        aspect-ratio: 1920 / 704;
+        background-size: contain;
+        background-color: #f5c518;
+        align-items: flex-end;
+        margin-top: 72px;
+        padding-top: 0;
+      }
+
+      .hero-stats,
+      .hero-scroll {
+        display: none;
+      }
+    }
+
+    @media(max-width: 480px) {
+      #hero {
+        margin-top: 64px;
       }
     }
 
